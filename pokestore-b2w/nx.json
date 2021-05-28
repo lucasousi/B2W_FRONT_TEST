@@ -22,13 +22,6 @@
     }
   },
   "projects": {
-    "pokestore-b2w": {
-      "tags": []
-    },
-    "pokestore-b2w-e2e": {
-      "tags": [],
-      "implicitDependencies": ["pokestore-b2w"]
-    },
     "aquamons-store": {
       "tags": []
     }
