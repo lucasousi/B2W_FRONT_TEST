@@ -1,0 +1,40 @@
+{
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "pokestore-b2w",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "Y2NlNzMwZTgtNWQwZC00YmJmLTk4N2YtZjA0MDE4Mzc4ZWFhfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "pokestore-b2w": {
+      "tags": []
+    },
+    "pokestore-b2w-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "pokestore-b2w"
+      ]
+    }
+  }
+}

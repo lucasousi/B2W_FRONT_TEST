@@ -1,0 +1,129 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "defaultProject": "pokestore-b2w",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "strict": true,
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint",
+        "strict": true
+      }
+    }
+  },
+  "projects": {
+    "pokestore-b2w": {
+      "root": "apps/pokestore-b2w",
+      "sourceRoot": "apps/pokestore-b2w/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/pokestore-b2w",
+            "index": "apps/pokestore-b2w/src/index.html",
+            "main": "apps/pokestore-b2w/src/main.tsx",
+            "polyfills": "apps/pokestore-b2w/src/polyfills.ts",
+            "tsConfig": "apps/pokestore-b2w/tsconfig.app.json",
+            "assets": [
+              "apps/pokestore-b2w/src/favicon.ico",
+              "apps/pokestore-b2w/src/assets"
+            ],
+            "styles": ["apps/pokestore-b2w/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/pokestore-b2w/src/environments/environment.ts",
+                  "with": "apps/pokestore-b2w/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "pokestore-b2w:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "pokestore-b2w:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pokestore-b2w/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/pokestore-b2w"],
+          "options": {
+            "jestConfig": "apps/pokestore-b2w/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pokestore-b2w-e2e": {
+      "root": "apps/pokestore-b2w-e2e",
+      "sourceRoot": "apps/pokestore-b2w-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pokestore-b2w-e2e/cypress.json",
+            "tsConfig": "apps/pokestore-b2w-e2e/tsconfig.e2e.json",
+            "devServerTarget": "pokestore-b2w:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pokestore-b2w:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pokestore-b2w-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
