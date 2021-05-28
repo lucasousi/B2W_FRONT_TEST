@@ -14,12 +14,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "Y2NlNzMwZTgtNWQwZC00YmJmLTk4N2YtZjA0MDE4Mzc4ZWFhfHJlYWQtd3JpdGU=",
         "canTrackAnalytics": false,
         "showUsageWarnings": true
@@ -32,9 +27,10 @@
     },
     "pokestore-b2w-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "pokestore-b2w"
-      ]
+      "implicitDependencies": ["pokestore-b2w"]
+    },
+    "aquamons-store": {
+      "tags": []
     }
   }
 }
