@@ -24,6 +24,12 @@
   "projects": {
     "aquamons-store": {
       "tags": []
+    },
+    "firemons-store": {
+      "tags": []
+    },
+    "psychicmons-store": {
+      "tags": []
     }
   }
 }
