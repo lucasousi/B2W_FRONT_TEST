@@ -23,13 +23,13 @@
   },
   "projects": {
     "aquamons-store": {
-      "tags": []
+      "tags": ["type:app", "scope:aquamons-store"]
     },
     "firemons-store": {
-      "tags": []
+      "tags": ["type:app", "scope:firemons-store"]
     },
     "psychicmons-store": {
-      "tags": []
+      "tags": ["type:app", "scope:psychicmons-store"]
     }
   }
 }
