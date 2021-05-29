@@ -27,6 +27,7 @@
   },
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "@types/react-router-dom": "^5.1.7",
     "all": "^0.0.0",
     "core-js": "^3.6.5",
