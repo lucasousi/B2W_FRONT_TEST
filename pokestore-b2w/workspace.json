@@ -142,6 +142,29 @@
           }
         }
       }
+    },
+    "aquamons-store-home": {
+      "root": "libs/aquamons-store/home",
+      "sourceRoot": "libs/aquamons-store/home/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/aquamons-store/home/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/aquamons-store/home"],
+          "options": {
+            "jestConfig": "libs/aquamons-store/home/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

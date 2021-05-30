@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@aquamons-store/home": ["libs/aquamons-store/home/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

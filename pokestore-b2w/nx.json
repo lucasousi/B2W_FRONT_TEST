@@ -30,6 +30,9 @@
     },
     "psychicmons-store": {
       "tags": ["type:app", "scope:psychicmons-store"]
+    },
+    "aquamons-store-home": {
+      "tags": ["type:lib\"", "\"scope:aquamons-store"]
     }
   }
 }

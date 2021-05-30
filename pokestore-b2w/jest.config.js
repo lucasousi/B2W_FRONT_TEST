@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/apps/aquamons-store',
     '<rootDir>/apps/firemons-store',
     '<rootDir>/apps/psychicmons-store',
+    '<rootDir>/libs/aquamons-store/home',
   ],
 };
