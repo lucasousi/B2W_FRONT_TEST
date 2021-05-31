@@ -165,6 +165,50 @@
           }
         }
       }
+    },
+    "shared-components-material-icon": {
+      "root": "libs/shared/components/material-icon",
+      "sourceRoot": "libs/shared/components/material-icon/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/components/material-icon/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/components/material-icon"],
+          "options": {
+            "jestConfig": "libs/shared/components/material-icon/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "bootstrap-tooltip": {
+      "root": "libs/bootstrap-tooltip",
+      "sourceRoot": "libs/bootstrap-tooltip/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/bootstrap-tooltip/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/bootstrap-tooltip"],
+          "options": {
+            "jestConfig": "libs/bootstrap-tooltip/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

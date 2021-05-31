@@ -32,7 +32,13 @@
       "tags": ["type:app", "scope:psychicmons-store"]
     },
     "aquamons-store-home": {
-      "tags": ["type:lib\"", "\"scope:aquamons-store"]
+      "tags": ["type:lib", "scope:aquamons-store"]
+    },
+    "shared-components-material-icon": {
+      "tags": ["type:lib"]
+    },
+    "bootstrap-tooltip": {
+      "tags": ["type: lib"]
     }
   }
 }

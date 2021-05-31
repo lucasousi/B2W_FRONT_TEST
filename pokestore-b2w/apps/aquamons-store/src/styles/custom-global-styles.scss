@@ -1,10 +1,31 @@
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  // Ajuste nas fontes serrilhadas
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  backface-visibility: initial;
+  -webkit-backface-visibility: initial;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  text-rendering: optimizeLegibility;
+  -webkit-text-stroke-color: #333;
+  -webkit-text-stroke: 0.2px;
 }
 
 code {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
 }
