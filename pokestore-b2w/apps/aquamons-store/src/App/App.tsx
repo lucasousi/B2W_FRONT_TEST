@@ -2,7 +2,7 @@ import './app.scss';
 import '../styles/custom-global-styles.scss';
 
 import { Grid } from '@material-ui/core';
-import { MaterialIcon } from '@shared/components/material-icon';
+import { IconButton } from '@shared/components/icon-button';
 
 import { Routes } from '../routes/routes';
 
@@ -16,11 +16,12 @@ export function App() {
           </Grid>
           <Grid item xs={6}></Grid>
           <Grid item xs={2} className="flex justify-end">
-            <MaterialIcon
+            <IconButton
               iconName="shopping_cart"
-              type="two-tone"
+              iconType="two-tone"
               className="cart-icon"
               tooltipDescription="Carrrinho"
+              onClick={() => alert('oi')}
             />
           </Grid>
         </Grid>

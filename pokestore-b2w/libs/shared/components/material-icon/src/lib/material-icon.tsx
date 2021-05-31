@@ -2,13 +2,12 @@ import './material-icon.scss';
 
 import { forwardRef, HTMLAttributes } from 'react';
 
-import { TooltipProps } from '@material-ui/core';
 import { BootstrapTooltip } from '@shared/components/bootstrap-tooltip';
 import { TooltipChildrenProps } from '@shared/entities';
 
-export interface MaterialIconProps extends HTMLAttributes<HTMLSpanElement> {
+export interface MaterialIconProps {
   iconName: string;
-  type?: 'filled' | 'outlined' | 'two-tone';
+  iconType?: 'filled' | 'outlined' | 'two-tone';
   tooltipDescription?: string;
   tooltipPlacement?:
     | 'bottom-end'
@@ -25,12 +24,15 @@ export interface MaterialIconProps extends HTMLAttributes<HTMLSpanElement> {
     | 'top';
 }
 
+type FullMaterialIconProps = MaterialIconProps &
+  HTMLAttributes<HTMLSpanElement>;
+
 const IconBase = forwardRef<
   HTMLSpanElement,
-  TooltipChildrenProps<HTMLSpanElement> & MaterialIconProps
+  TooltipChildrenProps<HTMLSpanElement> & FullMaterialIconProps
 >((tooltipAndSpanProps, ref) => {
   const {
-    type,
+    iconType,
     iconName,
     className: externalClassName = '',
     ...defaultTooltipAndSpanProps
@@ -38,7 +40,7 @@ const IconBase = forwardRef<
 
   return (
     <span
-      className={`material-icon material-icons-${type} ${externalClassName}`}
+      className={`material-icon material-icons-${iconType} ${externalClassName}`}
       {...defaultTooltipAndSpanProps}
       ref={ref}
     >
@@ -47,7 +49,7 @@ const IconBase = forwardRef<
   );
 });
 
-export const MaterialIcon = (props: MaterialIconProps) => {
+export const MaterialIcon = (props: FullMaterialIconProps) => {
   const {
     tooltipDescription = '',
     tooltipPlacement = 'bottom',

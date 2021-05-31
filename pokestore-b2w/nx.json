@@ -39,6 +39,9 @@
     },
     "bootstrap-tooltip": {
       "tags": ["type: lib"]
+    },
+    "icon-button": {
+      "tags": ["type: lib"]
     }
   }
 }
