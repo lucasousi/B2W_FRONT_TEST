@@ -25,6 +25,9 @@
       ],
       "@shared/components/icon-button": [
         "libs/shared/components/icon-button/src/index.ts"
+      ],
+      "@shared/components/header": [
+        "libs/shared/components/header/src/index.ts"
       ]
     }
   },

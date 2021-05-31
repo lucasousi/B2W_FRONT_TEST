@@ -42,6 +42,9 @@
     },
     "icon-button": {
       "tags": ["type: lib"]
+    },
+    "header": {
+      "tags": []
     }
   }
 }

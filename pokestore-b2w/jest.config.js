@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/libs/shared/components/material-icon',
     '<rootDir>/libs/bootstrap-tooltip',
     '<rootDir>/libs/icon-button',
+    '<rootDir>/libs/header',
   ],
 };
