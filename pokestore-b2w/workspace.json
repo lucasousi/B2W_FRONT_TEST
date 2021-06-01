@@ -280,6 +280,29 @@
           }
         }
       }
+    },
+    "pokemon-card": {
+      "root": "libs/shared/components/pokemon-card",
+      "sourceRoot": "libs/shared/components/pokemon-card/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/components/pokemon-card/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/components/pokemon-card"],
+          "options": {
+            "jestConfig": "libs/shared/components/pokemon-card/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

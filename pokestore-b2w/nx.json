@@ -48,6 +48,9 @@
     },
     "cart-drawer": {
       "tags": ["type: lib"]
+    },
+    "pokemon-card": {
+      "tags": ["type: lib"]
     }
   }
 }

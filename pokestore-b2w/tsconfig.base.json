@@ -32,6 +32,9 @@
       ],
       "@shared/components/cart-drawer": [
         "libs/shared/components/cart-drawer/src/index.ts"
+      ],
+      "@shared/components/pokemon-card": [
+        "libs/shared/components/pokemon-card/src/index.ts"
       ]
     }
   },

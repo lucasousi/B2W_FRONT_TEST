@@ -10,5 +10,6 @@ module.exports = {
     '<rootDir>/libs/icon-button',
     '<rootDir>/libs/header',
     '<rootDir>/libs/cart-drawer',
+    '<rootDir>/libs/shared/components/pokemon-card',
   ],
 };
