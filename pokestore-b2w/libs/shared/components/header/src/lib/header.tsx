@@ -21,7 +21,7 @@ export const Header = ({ pageTitle }: HeaderProps) => {
               iconName="shopping_cart"
               iconType="two-tone"
               className="cart-icon"
-              tooltipDescription="Carrrinho"
+              tooltipDescription="Carrinho"
               onClick={() => alert('Falta implementar')}
             />
           </Grid>
