@@ -9,5 +9,6 @@ module.exports = {
     '<rootDir>/libs/bootstrap-tooltip',
     '<rootDir>/libs/icon-button',
     '<rootDir>/libs/header',
+    '<rootDir>/libs/cart-drawer',
   ],
 };

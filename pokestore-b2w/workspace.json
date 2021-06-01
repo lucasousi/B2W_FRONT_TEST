@@ -190,63 +190,92 @@
       }
     },
     "bootstrap-tooltip": {
-      "root": "libs/bootstrap-tooltip",
-      "sourceRoot": "libs/bootstrap-tooltip/src",
+      "root": "libs/shared/components/bootstrap-tooltip",
+      "sourceRoot": "libs/shared/components/bootstrap-tooltip/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/bootstrap-tooltip/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/shared/components/bootstrap-tooltip/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/bootstrap-tooltip"],
+          "outputs": ["coverage/libs/shared/components/bootstrap-tooltip"],
           "options": {
-            "jestConfig": "libs/bootstrap-tooltip/jest.config.js",
+            "jestConfig": "libs/shared/components/bootstrap-tooltip/jest.config.js",
             "passWithNoTests": true
           }
         }
       }
     },
     "icon-button": {
-      "root": "libs/icon-button",
-      "sourceRoot": "libs/icon-button/src",
+      "root": "libs/shared/components/icon-button",
+      "sourceRoot": "libs/shared/components/icon-button/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/icon-button/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/shared/components/icon-button/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/icon-button"],
+          "outputs": ["coverage/libs/shared/components/icon-button"],
           "options": {
-            "jestConfig": "libs/icon-button/jest.config.js",
+            "jestConfig": "libs/shared/components/icon-button/jest.config.js",
             "passWithNoTests": true
           }
         }
       }
     },
     "header": {
-      "root": "libs/header",
-      "sourceRoot": "libs/header/src",
+      "root": "libsshared/components/header",
+      "sourceRoot": "libs/shared/components/header/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/header/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/shared/components/header/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/header"],
+          "outputs": ["coverage/libs/shared/components/header"],
           "options": {
-            "jestConfig": "libs/header/jest.config.js",
+            "jestConfig": "libs/shared/components/header/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "cart-drawer": {
+      "root": "libs/shared/components/cart-drawer",
+      "sourceRoot": "libs/shared/components/cart-drawer/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/components/cart-drawer/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/components/cart-drawer"],
+          "options": {
+            "jestConfig": "libs/shared/components/cart-drawer/jest.config.js",
             "passWithNoTests": true
           }
         }

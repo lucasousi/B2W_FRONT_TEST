@@ -1,7 +1,7 @@
 import './app.scss';
 import '../styles/custom-global-styles.scss';
 
-import { Header } from '@shared/components/header';
+import { CartDrawer, Header } from '@shared/components';
 
 import { Routes } from '../routes/routes';
 
@@ -10,6 +10,7 @@ export function App() {
     <>
       <Header pageTitle="Aquamons Store" />
       <main className="app">
+        <CartDrawer />
         <Routes />
       </main>
     </>
