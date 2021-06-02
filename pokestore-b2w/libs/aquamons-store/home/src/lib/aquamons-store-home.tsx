@@ -17,7 +17,7 @@ export const AquamonsStoreHome = () => {
   ] = useState<SummaryPokemon[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const aquaTypeID = 11;
-  const pokemonsPerPage = 10;
+  const pokemonsPerPage = 12;
 
   useEffect(() => {
     getAquaPokemons();
@@ -71,7 +71,11 @@ export const AquamonsStoreHome = () => {
           <Grid
             key={index}
             item
-            xs={4}
+            xs={12}
+            sm={12}
+            md={6}
+            lg={4}
+            xl={3}
             className="home-container__pokecard-container mt-32"
           >
             <PokemonCard summaryPokemon={summaryPokemon} />

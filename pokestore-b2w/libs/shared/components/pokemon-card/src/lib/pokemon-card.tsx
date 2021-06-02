@@ -96,10 +96,10 @@ export function PokemonCard({ summaryPokemon: { pokemon } }: PokemonCardProps) {
 
       <CardContent className="flex flex-col">
         <Grid container spacing={3}>
-          <Grid item xs={4} className="flex justify-center items-center">
+          <Grid item xs={2} className="flex justify-center items-center">
             <span className="material-icons-two-tone">local_mall</span>
           </Grid>
-          <Grid item xs={8} className="flex flex-col">
+          <Grid item xs={10} className="flex flex-col">
             <span className="lead-color pokemon-price text-right">
               R$ {applyMaskMoneyBR(detailedPokemon.price, true)}
             </span>
