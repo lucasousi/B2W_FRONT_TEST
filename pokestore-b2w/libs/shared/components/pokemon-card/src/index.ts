@@ -1,1 +1,1 @@
-export * from './lib/shared-components-pokemon-card';
+export * from './lib/pokemon-card';

@@ -9,6 +9,11 @@ const {
 
 const nxPathAlias = {
   ['@styles']: path.resolve(__dirname, './src/styles'),
+  ['@aquamons-store/assets']: path.resolve(__dirname, './src/assets'),
+  ['@shared/helpers']: path.resolve(
+    __dirname,
+    '../../libs/shared/helpers/index.ts'
+  ),
   ['@shared/components']: path.resolve(
     __dirname,
     '../../libs/shared/components/index.ts'

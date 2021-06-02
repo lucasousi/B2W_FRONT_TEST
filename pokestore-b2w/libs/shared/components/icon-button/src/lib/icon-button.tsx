@@ -15,7 +15,7 @@ export type IconButtonProps = MaterialIconProps &
 export const IconButton = (props: IconButtonProps) => {
   const {
     iconName,
-    iconType,
+    iconType = 'two-tone',
     tooltipDescription = '',
     tooltipPlacement = 'bottom',
     className: externalClassName = '',

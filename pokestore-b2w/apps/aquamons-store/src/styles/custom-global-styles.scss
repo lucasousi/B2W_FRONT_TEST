@@ -1,3 +1,5 @@
+@use './colors.scss' as colors;
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -21,11 +23,36 @@ code {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
 }
 
 h2 {
   font-size: 2rem;
-  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+.iron-color {
+  color: colors.$iron-color;
+}
+
+.lead-color {
+  color: colors.$lead-color;
+}
+
+.gray-color,
+.grey-color {
+  color: colors.$gray-color;
 }

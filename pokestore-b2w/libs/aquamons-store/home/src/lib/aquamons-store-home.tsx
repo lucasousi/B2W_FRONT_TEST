@@ -2,6 +2,8 @@ import './aquamons-store-home.scss';
 
 import { useEffect, useState } from 'react';
 
+import { Grid } from '@material-ui/core';
+import { PokemonCard } from '@shared/components';
 import { GetPokemonByTypeDTO, SummaryPokemon } from '@shared/entities/dtos';
 import { API } from '@shared/service';
 
@@ -9,12 +11,21 @@ export const AquamonsStoreHome = () => {
   const [summarizedPokemons, setSummarizedPokemons] = useState<
     SummaryPokemon[]
   >([]);
-  const [pokemons, setPokemons] = useState([]);
+  const [
+    paginatedSummarizedPokemons,
+    setPaginatedSummarizedPokemons,
+  ] = useState<SummaryPokemon[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const aquaTypeID = 11;
+  const pokemonsPerPage = 10;
 
   useEffect(() => {
     getAquaPokemons();
   }, []);
+
+  useEffect(() => {
+    getPaginatedPokemons(0, currentPage);
+  }, [summarizedPokemons]);
 
   async function getAquaPokemons(): Promise<void> {
     try {
@@ -22,13 +33,53 @@ export const AquamonsStoreHome = () => {
         data: { pokemon },
       } = await API.get<GetPokemonByTypeDTO>(`type/${aquaTypeID}`);
 
-      setSummarizedPokemons(pokemon);
+      setSummarizedPokemons(pokemon?.length ? pokemon : []);
     } catch (ex) {
       console.error(ex);
     }
   }
 
-  return <section className="home-container">asd</section>;
+  function getPaginatedPokemons(currentPage: number, nextPage: number): void {
+    const fromRangeValue = currentPage * pokemonsPerPage;
+    const toRangeValue = nextPage * pokemonsPerPage;
+    const _summarizedPokemons = summarizedPokemons;
+
+    const paginatedSummarizedPokemons = _summarizedPokemons.slice(
+      fromRangeValue,
+      toRangeValue
+    );
+
+    setPaginatedSummarizedPokemons(paginatedSummarizedPokemons);
+  }
+
+  return (
+    <section className="home-container container mx-auto pt-20">
+      <Grid
+        container
+        spacing={3}
+        className="home-container__grid flex items-center"
+      >
+        <Grid item xs={12} className="home-container__title__subtitle">
+          <h2 className="lead-color">Loja de pokémons do tipo Água</h2>
+          <span className="gray-color">
+            Aqui você encontra os principais pokémons aquáticos para sua
+            pokedéx.
+          </span>
+        </Grid>
+
+        {paginatedSummarizedPokemons.map((summaryPokemon, index) => (
+          <Grid
+            key={index}
+            item
+            xs={4}
+            className="home-container__pokecard-container mt-32"
+          >
+            <PokemonCard summaryPokemon={summaryPokemon} />
+          </Grid>
+        ))}
+      </Grid>
+    </section>
+  );
 };
 
 export default AquamonsStoreHome;
