@@ -1,0 +1,11 @@
+@use '@styles/variables.scss' as variables;
+
+.header-container {
+  height: variables.$header-height;
+  background-color: white;
+  box-shadow: 0 0.5rem 1.25rem 0 rgb(218 224 235 / 60%);
+
+  .cart-icon {
+    font-size: 2rem;
+  }
+}

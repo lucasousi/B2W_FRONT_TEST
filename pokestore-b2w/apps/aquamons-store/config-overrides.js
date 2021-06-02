@@ -8,8 +8,27 @@ const {
 } = require('customize-cra');
 
 const nxPathAlias = {
-  ['@src']: path.resolve(__dirname, './src'),
   ['@styles']: path.resolve(__dirname, './src/styles'),
+  ['@shared/components']: path.resolve(
+    __dirname,
+    '../../libs/shared/components/index.ts'
+  ),
+  ['@shared/entities/dtos']: path.resolve(
+    __dirname,
+    '../../libs/shared/entities/dtos/index.ts'
+  ),
+  ['@shared/entities/view-models']: path.resolve(
+    __dirname,
+    '../../libs/shared/entities/view-models/index.ts'
+  ),
+  ['@shared/entities/component-models']: path.resolve(
+    __dirname,
+    '../../libs/shared/entities/component-models/index.ts'
+  ),
+  ['@shared/service']: path.resolve(
+    __dirname,
+    '../../libs/shared/service/index.ts'
+  ),
 };
 
 /* Webpack config override to allow tailwind and nx work weel */
