@@ -12,10 +12,12 @@ export const AquamonsStoreHome = () => {
   const [summarizedPokemons, setSummarizedPokemons] = useState<
     SummaryPokemon[]
   >([]);
+
   const [
     paginatedSummarizedPokemons,
     setPaginatedSummarizedPokemons,
   ] = useState<SummaryPokemon[]>([]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const aquaTypeID = 11;
   const pokemonsPerPage = 12;
@@ -62,7 +64,7 @@ export const AquamonsStoreHome = () => {
       <Grid
         container
         spacing={3}
-        className="home-container__grid flex items-center"
+        className="home-container__grid flex justify-center"
       >
         <Grid item xs={12} className="home-container__title__subtitle">
           <h2 className="lead-color">Loja de pokémons do tipo Água</h2>
@@ -81,7 +83,7 @@ export const AquamonsStoreHome = () => {
             md={6}
             lg={4}
             xl={3}
-            className="home-container__pokecard-container mt-32"
+            className="home-container__pokecard-container"
           >
             <PokemonCard summaryPokemon={summaryPokemon} />
           </Grid>

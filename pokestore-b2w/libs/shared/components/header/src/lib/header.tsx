@@ -14,7 +14,7 @@ export const Header = ({ pageTitle }: HeaderProps) => {
       <div className="container mx-auto px-5">
         <Grid container spacing={1} className="flex items-center">
           <Grid item xs={5} className="flex">
-            <img src={WaterLogo} width="50px" className="mr-3" />
+            <img src={WaterLogo} className="mr-3" width="50px" height="50px" />
             <h2>{pageTitle}</h2>
           </Grid>
           <Grid item xs={5}></Grid>

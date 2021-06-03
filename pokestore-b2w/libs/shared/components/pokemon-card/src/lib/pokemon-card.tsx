@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     expand: {
       transform: 'rotate(0deg)',
-      marginLeft: 'auto',
       transition: theme.transitions.create('transform', {
         duration: theme.transitions.duration.shortest,
       }),
@@ -79,13 +78,17 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
   return isLoading ? (
     <Skeleton variant="rect" height={212} />
   ) : detailedPokemon ? (
-    <Card className={classes.root}>
+    <Card
+      className={`pokemon-card ${classes.root}`}
+      onMouseLeave={() => expanded && handleExpandClick()}
+    >
       <CardHeader
         avatar={
           <img
             src={detailedPokemon.sprites.front_default}
             alt={detailedPokemon.name}
             width="96px"
+            height="96px"
           />
         }
         title={
@@ -105,38 +108,54 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
         }
       />
 
-      <CardActions disableSpacing>
-        <Button
-          variant="outlined"
-          color="primary"
-          startIcon={
-            <span className="material-icons-outlined">add_shopping_cart</span>
-          }
-        >
-          Adicionar ao Carrinho
-        </Button>
-        <IconButton
-          iconName="expand_more"
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          tooltipDescription="Ver detalhes"
-        ></IconButton>
+      <CardActions disableSpacing className="pokemon-card__actions">
+        <div className="pokemon-card__actions__left">
+          <Button
+            variant="outlined"
+            color="primary"
+            startIcon={
+              <span className="material-icons-outlined">add_shopping_cart</span>
+            }
+          >
+            Comprar
+          </Button>
+        </div>
+        <div className="pokemon-card__actions__right">
+          <IconButton
+            iconName="auto_stories"
+            iconType="two-tone"
+            tooltipDescription="Ver dossiê pokémon"
+          />
+          <IconButton
+            iconName="arrow_drop_down"
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            tooltipDescription="Ver detalhes básicos"
+          ></IconButton>
+        </div>
       </CardActions>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className="flex flex-col">
           <p className="iron-color">{`Peso: ${convertHectogramToKilogram(
             detailedPokemon.weight
-          )} KG | Altura: ${convertDecimeterToCentimeter(
+          )} KG`}</p>
+          <p className="iron-color">{`Altura: ${convertDecimeterToCentimeter(
             detailedPokemon.height
           )} CM`}</p>
-          <h5 className="lead-color mb-3">Habilidades</h5>
+          <p className="iron-color mt-3">Habilidades:</p>
           {detailedPokemon.abilities &&
             detailedPokemon.abilities.map((abilityInfo, index) => (
-              <small key={index}>{abilityInfo?.ability?.name}</small>
+              <p className="iron-color" key={index}>
+                {`- ${
+                  abilityInfo?.ability?.name
+                    ? toTitleCase(abilityInfo.ability.name)
+                    : ''
+                }`}
+              </p>
             ))}
         </CardContent>
       </Collapse>

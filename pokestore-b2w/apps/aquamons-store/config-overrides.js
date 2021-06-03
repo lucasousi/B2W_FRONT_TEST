@@ -42,7 +42,10 @@ module.exports = {
   webpack: (config) => {
     // Override config of webpack CRA
     const overrideConfig = override(
-      addPostcssPlugins([require('tailwindcss'), require('autoprefixer')]),
+      addPostcssPlugins([
+        require('tailwindcss')('./tailwind.config.js'),
+        require('autoprefixer'),
+      ]),
       addWebpackAlias(nxPathAlias)
     )(config);
 
