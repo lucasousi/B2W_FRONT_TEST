@@ -4,9 +4,9 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import {
-    Button, Card, CardActions, CardContent, CardHeader, Collapse, createStyles, Grid, makeStyles,
-    Theme
+    Button, Card, CardActions, CardContent, CardHeader, Collapse, createStyles, makeStyles, Theme
 } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 import { IconButton } from '@shared/components/icon-button';
 import { DetailedPokemon, SummaryPokemon } from '@shared/entities/dtos';
 import { PokemonViewModel } from '@shared/entities/view-models';
@@ -41,6 +41,7 @@ export interface PokemonCardProps {
 export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
   const { pokemon } = summaryPokemon;
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(true);
   const [detailedPokemon, setDetailedPokemon] = useState<PokemonViewModel>();
   const [expanded, setExpanded] = useState(false);
   const maxInstallments = 10;
@@ -61,6 +62,7 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
 
   async function getPokemonDetailedInfo() {
     try {
+      setIsLoading(true);
       const { data } = await API.get<DetailedPokemon>(pokemon.url);
       const __pokemonViewModel: PokemonViewModel = {
         ...data,
@@ -69,10 +71,14 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
       setDetailedPokemon(__pokemonViewModel);
     } catch (ex) {
       console.error(ex);
+    } finally {
+      setIsLoading(false);
     }
   }
 
-  return detailedPokemon ? (
+  return isLoading ? (
+    <Skeleton variant="rect" height={212} />
+  ) : detailedPokemon ? (
     <Card className={classes.root}>
       <CardHeader
         avatar={
@@ -92,7 +98,7 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
             </span>
             <span className="iron-color">
               10x de R${' '}
-              {getFormattedInstallmentRealValue(detailedPokemon.price)} c/
+              {getFormattedInstallmentRealValue(detailedPokemon.price)} s/
               juros.
             </span>
           </div>
@@ -101,6 +107,7 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
 
       <CardActions disableSpacing>
         <Button
+          variant="outlined"
           color="primary"
           startIcon={
             <span className="material-icons-outlined">add_shopping_cart</span>
@@ -135,7 +142,7 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
       </Collapse>
     </Card>
   ) : (
-    <></>
+    <span>Nenhum pokémon encontrado.</span>
   );
 }
 

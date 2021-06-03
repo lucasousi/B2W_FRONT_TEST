@@ -1,18 +1,30 @@
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Redirect, RouteProps, Switch } from 'react-router-dom';
 
-import { AquamonsStoreHome } from '@aquamons-store/home';
+import { CustomRoute } from './custom-route';
+
+const AquamonsStoreHome = lazy(() =>
+  import('@aquamons-store/home').then(({ AquamonsStoreHome }) => ({
+    default: AquamonsStoreHome,
+  }))
+);
+
+const navigableRoutes: RouteProps[] = [
+  { path: '/', exact: true, component: () => <Redirect to="/home" /> },
+  { path: '/home', component: AquamonsStoreHome },
+];
 
 export const Routes = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-        <Route exact path="/home">
-          <AquamonsStoreHome />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <Suspense fallback={<></>}>
+      <BrowserRouter>
+        <Switch>
+          {!!navigableRoutes?.length &&
+            navigableRoutes.map((route, index) => (
+              <CustomRoute key={index} {...route}></CustomRoute>
+            ))}
+        </Switch>
+      </BrowserRouter>
+    </Suspense>
   );
 };
