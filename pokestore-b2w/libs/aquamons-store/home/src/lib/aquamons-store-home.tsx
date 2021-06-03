@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { PokemonCard } from '@shared/components';
 import { GetPokemonByTypeDTO, SummaryPokemon } from '@shared/entities/dtos';
+import { getLimitedRandonNumber } from '@shared/helpers';
 import { API } from '@shared/service';
 
 export const AquamonsStoreHome = () => {
@@ -33,6 +34,10 @@ export const AquamonsStoreHome = () => {
         data: { pokemon },
       } = await API.get<GetPokemonByTypeDTO>(`type/${aquaTypeID}`);
 
+      pokemon.forEach(
+        (item) => (item.price = getLimitedRandonNumber(100, 1000))
+      );
+
       setSummarizedPokemons(pokemon?.length ? pokemon : []);
     } catch (ex) {
       console.error(ex);
@@ -53,7 +58,7 @@ export const AquamonsStoreHome = () => {
   }
 
   return (
-    <section className="home-container container mx-auto pt-20">
+    <section className="home-container container mx-auto px-5 py-20">
       <Grid
         container
         spacing={3}

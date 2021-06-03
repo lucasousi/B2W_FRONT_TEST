@@ -16,7 +16,7 @@ export function convertDecimeterToCentimeter(decimeter: number) {
 }
 
 export function getLimitedRandonNumber(minValue: number, maxValue: number) {
-  return (Math.random() * (maxValue - minValue) + minValue).toFixed(2);
+  return Number((Math.random() * (maxValue - minValue) + minValue).toFixed(2));
 }
 
 export function applyMaskMoneyBR(value: number, hiddenSymbol?: boolean) {

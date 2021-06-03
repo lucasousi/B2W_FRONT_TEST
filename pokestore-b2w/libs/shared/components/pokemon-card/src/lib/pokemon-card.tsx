@@ -11,8 +11,7 @@ import { IconButton } from '@shared/components/icon-button';
 import { DetailedPokemon, SummaryPokemon } from '@shared/entities/dtos';
 import { PokemonViewModel } from '@shared/entities/view-models';
 import {
-    applyMaskMoneyBR, convertDecimeterToCentimeter, convertHectogramToKilogram,
-    getLimitedRandonNumber, toTitleCase
+    applyMaskMoneyBR, convertDecimeterToCentimeter, convertHectogramToKilogram, toTitleCase
 } from '@shared/helpers';
 import { API } from '@shared/service';
 
@@ -39,7 +38,8 @@ export interface PokemonCardProps {
   summaryPokemon: SummaryPokemon;
 }
 
-export function PokemonCard({ summaryPokemon: { pokemon } }: PokemonCardProps) {
+export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
+  const { pokemon } = summaryPokemon;
   const classes = useStyles();
   const [detailedPokemon, setDetailedPokemon] = useState<PokemonViewModel>();
   const [expanded, setExpanded] = useState(false);
@@ -50,9 +50,9 @@ export function PokemonCard({ summaryPokemon: { pokemon } }: PokemonCardProps) {
   }, []);
 
   function getFormattedInstallmentRealValue(value: number) {
-    return Math.ceil(
-      Number((applyMaskMoneyBR(value, true) / maxInstallments).toFixed(2))
-    ).toFixed(2);
+    const installmentValue = value / maxInstallments;
+
+    return applyMaskMoneyBR(installmentValue, true);
   }
 
   function handleExpandClick() {
@@ -64,7 +64,7 @@ export function PokemonCard({ summaryPokemon: { pokemon } }: PokemonCardProps) {
       const { data } = await API.get<DetailedPokemon>(pokemon.url);
       const __pokemonViewModel: PokemonViewModel = {
         ...data,
-        price: getLimitedRandonNumber(100, 1000),
+        price: summaryPokemon.price,
       };
       setDetailedPokemon(__pokemonViewModel);
     } catch (ex) {
@@ -86,31 +86,18 @@ export function PokemonCard({ summaryPokemon: { pokemon } }: PokemonCardProps) {
           <h4 className="lead-color">{toTitleCase(detailedPokemon.name)}</h4>
         }
         subheader={
-          <p className="iron-color">{`Peso: ${convertHectogramToKilogram(
-            detailedPokemon.weight
-          )} KG | Altura: ${convertDecimeterToCentimeter(
-            detailedPokemon.height
-          )} CM`}</p>
-        }
-      />
-
-      <CardContent className="flex flex-col">
-        <Grid container spacing={3}>
-          <Grid item xs={2} className="flex justify-center items-center">
-            <span className="material-icons-two-tone">local_mall</span>
-          </Grid>
-          <Grid item xs={10} className="flex flex-col">
-            <span className="lead-color pokemon-price text-right">
+          <div className="flex flex-col">
+            <span className="lead-color pokemon-price">
               R$ {applyMaskMoneyBR(detailedPokemon.price, true)}
             </span>
-            <span className="iron-color text-right">
+            <span className="iron-color">
               10x de R${' '}
               {getFormattedInstallmentRealValue(detailedPokemon.price)} c/
               juros.
             </span>
-          </Grid>
-        </Grid>
-      </CardContent>
+          </div>
+        }
+      />
 
       <CardActions disableSpacing>
         <Button
@@ -134,6 +121,11 @@ export function PokemonCard({ summaryPokemon: { pokemon } }: PokemonCardProps) {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className="flex flex-col">
+          <p className="iron-color">{`Peso: ${convertHectogramToKilogram(
+            detailedPokemon.weight
+          )} KG | Altura: ${convertDecimeterToCentimeter(
+            detailedPokemon.height
+          )} CM`}</p>
           <h5 className="lead-color mb-3">Habilidades</h5>
           {detailedPokemon.abilities &&
             detailedPokemon.abilities.map((abilityInfo, index) => (
