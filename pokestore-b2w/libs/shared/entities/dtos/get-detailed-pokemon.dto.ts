@@ -19,6 +19,7 @@ export interface GetDetailedPokemonDTO {
   stats: Stat[];
   types: Type[];
   weight: number;
+  price?: number;
 }
 
 interface Type {

@@ -8,6 +8,7 @@ import { App } from './app/app';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
+// Persist akita state on localStorage
 enableAkitaProdMode();
 persistState();
 
