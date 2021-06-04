@@ -1,6 +1,12 @@
+@use '@styles/variables.scss' as variables;
+
 .pokemon-price {
   font-size: 1.5rem;
   font-weight: 500;
+}
+
+.pokemon-card {
+  // box-shadow: variables.$awesome-box-shadow !important;
 }
 
 .pokemon-card__actions {

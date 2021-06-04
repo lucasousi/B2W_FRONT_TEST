@@ -4,12 +4,23 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 import {
-    Button, Card, CardActions, CardContent, CardHeader, Collapse, createStyles, makeStyles, Theme
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Collapse,
+  createStyles,
+  makeStyles,
+  Theme,
 } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
 import { PokemonViewModel } from '@shared/entities/view-models';
 import {
-    applyMaskMoneyBR, convertDecimeterToCentimeter, convertHectogramToKilogram, toTitleCase
+  applyMaskMoneyBR,
+  convertDecimeterToCentimeter,
+  convertHectogramToKilogram,
+  toTitleCase,
 } from '@shared/helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,7 +61,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
   }
 
   return formattedPokemon ? (
-    <Card className={`pokemon-card ${classes.root}`} onMouseLeave={() => expanded && handleExpandClick()}>
+    <Card className={`pokemon-card shadow-sm ${classes.root}`} onMouseLeave={() => expanded && handleExpandClick()}>
       <CardHeader
         avatar={
           <img src={formattedPokemon.sprites.front_default} alt={formattedPokemon.name} width="96px" height="96px" />
