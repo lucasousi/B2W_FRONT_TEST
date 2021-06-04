@@ -36,3 +36,7 @@ export function applyMaskMoneyBR(value: number, hiddenSymbol?: boolean) {
         maximumFractionDigits: 2,
       });
 }
+
+export function fastCompareObjects<TObject1, TObject2>(object1: TObject1, object2: TObject2) {
+  return JSON.stringify(object1) === JSON.stringify(object2);
+}

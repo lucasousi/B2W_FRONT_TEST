@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Subscription } from 'rxjs';
 
 import { Grid } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 import { PokemonCard } from '@shared/components';
 import {
     useDetailedPokemonsQuery, useDetailedPokemonsService, useSummarizedPokemonsQuery,
@@ -15,38 +16,40 @@ import { PokemonViewModel } from '@shared/entities/view-models';
 export const AquamonsStoreHome = () => {
   const aquaTypeID = 11;
   const pokemonsPerPage = 12;
+  const fakeArrayToLoadingSkeleton = [...Array(10).keys()];
 
   const { getSummarizedPokemons } = useSummarizedPokemonsService();
   const { summarizedPokemons$ } = useSummarizedPokemonsQuery();
   const { getPokemonsDetailedInfo, convertDetailedPokemonToPokemonViewModel } = useDetailedPokemonsService();
-  const { detailedPokemons$ } = useDetailedPokemonsQuery();
+  const { detailedPokemons$, isLoading$ } = useDetailedPokemonsQuery();
+
+  const [isLoadingDetailedPokemons, setIsLoadingDetailedPokemons] = useState(false);
   const [formattedPokemons, setFormattedPokemons] = useState<PokemonViewModel[]>();
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const subscription1 = subscribeSummarizedPokemonsChanges();
     const subscription2 = subscribeDetailedPokemonsChanges();
+    const subscription3 = subscribeIsLoadingDetailedPokemonsChanges();
     getSummarizedPokemons(aquaTypeID);
 
     return function cleanup() {
-      console.log('cleanup');
       subscription1.unsubscribe();
       subscription2.unsubscribe();
+      subscription3.unsubscribe();
     };
   }, []);
 
   function subscribeSummarizedPokemonsChanges(): Subscription {
-    const subscription = summarizedPokemons$.subscribe((value) => {
+    return summarizedPokemons$.subscribe((value) => {
       if (value.length) {
         getPaginatedPokemons(value, 0, currentPage);
       }
     });
-
-    return subscription;
   }
 
   function subscribeDetailedPokemonsChanges(): Subscription {
-    const subscription = detailedPokemons$.subscribe((value) => {
+    return detailedPokemons$.subscribe((value) => {
       if (value.length) {
         const _pokemonViewModel: PokemonViewModel[] = value.map((detailedPokemon) =>
           convertDetailedPokemonToPokemonViewModel(detailedPokemon)
@@ -55,8 +58,12 @@ export const AquamonsStoreHome = () => {
         setFormattedPokemons(_pokemonViewModel);
       }
     });
+  }
 
-    return subscription;
+  function subscribeIsLoadingDetailedPokemonsChanges(): Subscription {
+    return isLoading$.subscribe((value) => {
+      setIsLoadingDetailedPokemons(value);
+    });
   }
 
   function getPaginatedPokemons(allPokemons: SummaryPokemon[], currentPage: number, nextPage: number): void {
@@ -76,11 +83,35 @@ export const AquamonsStoreHome = () => {
           <span className="gray-color">Aqui você encontra os principais pokémons aquáticos para sua pokedéx.</span>
         </Grid>
 
-        {formattedPokemons?.map((formattedPokemon, index) => (
-          <Grid key={index} item xs={12} sm={12} md={6} lg={4} xl={3} className="home-container__pokecard-container">
-            <PokemonCard formattedPokemon={formattedPokemon} />
-          </Grid>
-        ))}
+        {isLoadingDetailedPokemons
+          ? fakeArrayToLoadingSkeleton.map((fakeValue, index) => (
+              <Grid
+                key={index}
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={4}
+                xl={3}
+                className="home-container__pokecard-container"
+              >
+                <Skeleton key={index} variant="rect" height={212} />
+              </Grid>
+            ))
+          : formattedPokemons?.map((formattedPokemon, index) => (
+              <Grid
+                key={index}
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={4}
+                xl={3}
+                className="home-container__pokecard-container"
+              >
+                <PokemonCard formattedPokemon={formattedPokemon} />
+              </Grid>
+            ))}
       </Grid>
     </section>
   );

@@ -1,14 +1,12 @@
 import './pokemon-card.scss';
 
 import clsx from 'clsx';
-import { memo, useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import {
     Button, Card, CardActions, CardContent, CardHeader, Collapse, createStyles, makeStyles, Theme
 } from '@material-ui/core';
-import Skeleton from '@material-ui/lab/Skeleton';
 import { IconButton } from '@shared/components/icon-button';
-import { useDetailedPokemonsQuery } from '@shared/data';
 import { PokemonViewModel } from '@shared/entities/view-models';
 import {
     applyMaskMoneyBR, convertDecimeterToCentimeter, convertHectogramToKilogram, toTitleCase
@@ -36,29 +34,10 @@ export interface PokemonCardProps {
   formattedPokemon: PokemonViewModel;
 }
 
-export const PokemonCard = memo<PokemonCardProps>(({ formattedPokemon }) => {
-  console.log(formattedPokemon);
+export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
   const maxInstallments = 10;
   const classes = useStyles();
-  const { isLoading$ } = useDetailedPokemonsQuery();
-  const [isLoading, setIsLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
-
-  useEffect(() => {
-    const subscription = subscribeIsLoadingChanges();
-
-    return function cleanup() {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  function subscribeIsLoadingChanges() {
-    const subscription = isLoading$.subscribe((value) => {
-      setIsLoading(value);
-    });
-
-    return subscription;
-  }
 
   function getFormattedInstallmentRealValue(value: number) {
     const installmentValue = value / maxInstallments;
@@ -70,9 +49,7 @@ export const PokemonCard = memo<PokemonCardProps>(({ formattedPokemon }) => {
     setExpanded(!expanded);
   }
 
-  return isLoading ? (
-    <Skeleton variant="rect" height={212} />
-  ) : formattedPokemon ? (
+  return formattedPokemon ? (
     <Card className={`pokemon-card ${classes.root}`} onMouseLeave={() => expanded && handleExpandClick()}>
       <CardHeader
         avatar={
@@ -130,6 +107,6 @@ export const PokemonCard = memo<PokemonCardProps>(({ formattedPokemon }) => {
   ) : (
     <span>Nenhum pokémon encontrado.</span>
   );
-});
+};
 
 export default PokemonCard;
