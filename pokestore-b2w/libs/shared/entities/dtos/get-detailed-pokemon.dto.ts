@@ -1,6 +1,6 @@
-import { NameUrlRelation } from '@shared/entities/dtos';
+import { NameUrlRelation } from '../dtos';
 
-export interface DetailedPokemon {
+export interface GetDetailedPokemonDTO {
   abilities: AbilityInfo[];
   base_experience: number;
   forms: NameUrlRelation[];

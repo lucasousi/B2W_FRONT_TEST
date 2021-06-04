@@ -20,7 +20,9 @@ export function getLimitedRandonNumber(minValue: number, maxValue: number) {
 }
 
 export function applyMaskMoneyBR(value: number, hiddenSymbol?: boolean) {
-  return hiddenSymbol
+  return value === null || value === undefined
+    ? '-'
+    : hiddenSymbol
     ? value.toLocaleString('pt-BR', {
         style: 'decimal',
         minimumFractionDigits: 2,

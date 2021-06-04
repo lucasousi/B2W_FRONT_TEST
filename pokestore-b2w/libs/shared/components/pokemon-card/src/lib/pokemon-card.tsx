@@ -1,19 +1,18 @@
 import './pokemon-card.scss';
 
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import {
     Button, Card, CardActions, CardContent, CardHeader, Collapse, createStyles, makeStyles, Theme
 } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { IconButton } from '@shared/components/icon-button';
-import { DetailedPokemon, SummaryPokemon } from '@shared/entities/dtos';
+import { useDetailedPokemonsQuery } from '@shared/data';
 import { PokemonViewModel } from '@shared/entities/view-models';
 import {
     applyMaskMoneyBR, convertDecimeterToCentimeter, convertHectogramToKilogram, toTitleCase
 } from '@shared/helpers';
-import { API } from '@shared/service';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,20 +33,32 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export interface PokemonCardProps {
-  summaryPokemon: SummaryPokemon;
+  formattedPokemon: PokemonViewModel;
 }
 
-export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
-  const { pokemon } = summaryPokemon;
-  const classes = useStyles();
-  const [isLoading, setIsLoading] = useState(true);
-  const [detailedPokemon, setDetailedPokemon] = useState<PokemonViewModel>();
-  const [expanded, setExpanded] = useState(false);
+export const PokemonCard = memo<PokemonCardProps>(({ formattedPokemon }) => {
+  console.log(formattedPokemon);
   const maxInstallments = 10;
+  const classes = useStyles();
+  const { isLoading$ } = useDetailedPokemonsQuery();
+  const [isLoading, setIsLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    getPokemonDetailedInfo();
+    const subscription = subscribeIsLoadingChanges();
+
+    return function cleanup() {
+      subscription.unsubscribe();
+    };
   }, []);
+
+  function subscribeIsLoadingChanges() {
+    const subscription = isLoading$.subscribe((value) => {
+      setIsLoading(value);
+    });
+
+    return subscription;
+  }
 
   function getFormattedInstallmentRealValue(value: number) {
     const installmentValue = value / maxInstallments;
@@ -59,50 +70,20 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
     setExpanded(!expanded);
   }
 
-  async function getPokemonDetailedInfo() {
-    try {
-      setIsLoading(true);
-      const { data } = await API.get<DetailedPokemon>(pokemon.url);
-      const __pokemonViewModel: PokemonViewModel = {
-        ...data,
-        price: summaryPokemon.price,
-      };
-      setDetailedPokemon(__pokemonViewModel);
-    } catch (ex) {
-      console.error(ex);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   return isLoading ? (
     <Skeleton variant="rect" height={212} />
-  ) : detailedPokemon ? (
-    <Card
-      className={`pokemon-card ${classes.root}`}
-      onMouseLeave={() => expanded && handleExpandClick()}
-    >
+  ) : formattedPokemon ? (
+    <Card className={`pokemon-card ${classes.root}`} onMouseLeave={() => expanded && handleExpandClick()}>
       <CardHeader
         avatar={
-          <img
-            src={detailedPokemon.sprites.front_default}
-            alt={detailedPokemon.name}
-            width="96px"
-            height="96px"
-          />
+          <img src={formattedPokemon.sprites.front_default} alt={formattedPokemon.name} width="96px" height="96px" />
         }
-        title={
-          <h4 className="lead-color">{toTitleCase(detailedPokemon.name)}</h4>
-        }
+        title={<h4 className="lead-color">{toTitleCase(formattedPokemon.name)}</h4>}
         subheader={
           <div className="flex flex-col">
-            <span className="lead-color pokemon-price">
-              R$ {applyMaskMoneyBR(detailedPokemon.price, true)}
-            </span>
+            <span className="lead-color pokemon-price">R$ {applyMaskMoneyBR(formattedPokemon.price, true)}</span>
             <span className="iron-color">
-              10x de R${' '}
-              {getFormattedInstallmentRealValue(detailedPokemon.price)} s/
-              juros.
+              10x de R$ {getFormattedInstallmentRealValue(formattedPokemon.price)} s/ juros.
             </span>
           </div>
         }
@@ -113,19 +94,13 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
           <Button
             variant="outlined"
             color="primary"
-            startIcon={
-              <span className="material-icons-outlined">add_shopping_cart</span>
-            }
+            startIcon={<span className="material-icons-outlined">add_shopping_cart</span>}
           >
             Comprar
           </Button>
         </div>
         <div className="pokemon-card__actions__right">
-          <IconButton
-            iconName="auto_stories"
-            iconType="two-tone"
-            tooltipDescription="Ver dossiê pokémon"
-          />
+          <IconButton iconName="auto_stories" iconType="two-tone" tooltipDescription="Ver dossiê pokémon" />
           <IconButton
             iconName="arrow_drop_down"
             className={clsx(classes.expand, {
@@ -140,21 +115,13 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className="flex flex-col">
-          <p className="iron-color">{`Peso: ${convertHectogramToKilogram(
-            detailedPokemon.weight
-          )} KG`}</p>
-          <p className="iron-color">{`Altura: ${convertDecimeterToCentimeter(
-            detailedPokemon.height
-          )} CM`}</p>
+          <p className="iron-color">{`Peso: ${convertHectogramToKilogram(formattedPokemon.weight)} KG`}</p>
+          <p className="iron-color">{`Altura: ${convertDecimeterToCentimeter(formattedPokemon.height)} CM`}</p>
           <p className="iron-color mt-3">Habilidades:</p>
-          {detailedPokemon.abilities &&
-            detailedPokemon.abilities.map((abilityInfo, index) => (
+          {formattedPokemon.abilities &&
+            formattedPokemon.abilities.map((abilityInfo, index) => (
               <p className="iron-color" key={index}>
-                {`- ${
-                  abilityInfo?.ability?.name
-                    ? toTitleCase(abilityInfo.ability.name)
-                    : ''
-                }`}
+                {`- ${abilityInfo?.ability?.name ? toTitleCase(abilityInfo.ability.name) : ''}`}
               </p>
             ))}
         </CardContent>
@@ -163,6 +130,6 @@ export function PokemonCard({ summaryPokemon }: PokemonCardProps) {
   ) : (
     <span>Nenhum pokémon encontrado.</span>
   );
-}
+});
 
 export default PokemonCard;

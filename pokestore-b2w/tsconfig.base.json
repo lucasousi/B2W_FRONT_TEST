@@ -18,6 +18,7 @@
     "paths": {
       "@aquamons-store/home": ["libs/aquamons-store/home/src/index.ts"],
       "@aquamons-store/assets": ["apps/aquamons-store/src/assets"],
+      "@shared/data": ["libs/shared/data/index.ts"],
       "@shared/helpers": ["libs/shared/helpers/index.ts"],
       "@shared/hooks": ["libs/shared/hooks/index.ts"],
       "@shared/entities": ["libs/shared/entities/index.ts"],

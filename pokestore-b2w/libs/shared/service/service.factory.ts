@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import nprogress from 'nprogress';
+import { from, Observable, ObservableInput, zip } from 'rxjs';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -40,44 +41,38 @@ function handleResponseWithError(error: AxiosError) {
 }
 
 export const API = {
-  get<TResponse, TParams = any>(
-    endpoint: string,
-    params?: TParams
-  ): Promise<AxiosResponse<TResponse>> {
-    return axiosInstance.get<TResponse>(endpoint, { params });
+  get<TResponse, TParams = any>(endpoint: string, params?: TParams): Observable<AxiosResponse<TResponse>> {
+    return from(
+      axiosInstance.get<TResponse>(endpoint, { params })
+    );
   },
-  post<TResponse, TPayload>(
-    endpoint: string,
-    payload: TPayload
-  ): Promise<AxiosResponse<TResponse>> {
-    return axiosInstance.post<any, AxiosResponse<TResponse>>(
-      endpoint,
-      payload,
-      {
+
+  post<TResponse, TPayload>(endpoint: string, payload: TPayload): Observable<AxiosResponse<TResponse>> {
+    return from(
+      axiosInstance.post<any, AxiosResponse<TResponse>>(endpoint, payload, {
         headers: {
           'Content-Type': 'application/json',
         },
-      }
+      })
     );
   },
-  delete<TResponse>(
-    endpoint: string,
-    id: number
-  ): Promise<AxiosResponse<TResponse>> {
-    return axiosInstance.delete(`${endpoint}/${id}`);
+
+  delete<TResponse>(endpoint: string, id: number): Observable<AxiosResponse<TResponse>> {
+    return from(axiosInstance.delete(`${endpoint}/${id}`));
   },
-  put<TResponse, TPayload>(
-    endpoint: string,
-    payload: TPayload
-  ): Promise<AxiosResponse<TResponse>> {
-    return axiosInstance.put(endpoint, payload, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+
+  put<TResponse, TPayload>(endpoint: string, payload: TPayload): Observable<AxiosResponse<TResponse>> {
+    return from(
+      axiosInstance.put(endpoint, payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    );
   },
-  all<TResponse>(requests: any[]): Promise<TResponse[]> {
-    return Promise.all(requests);
+
+  all<TResponse>(requests: any): Observable<AxiosResponse<TResponse>[]> {
+    return zip<AxiosResponse<TResponse>[]>(requests);
   },
 };
 
