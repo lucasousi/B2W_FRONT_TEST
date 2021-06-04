@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { finalize } from 'rxjs/operators';
 
 import { GetDetailedPokemonDTO, SummaryPokemon } from '@shared/entities/dtos';
@@ -15,6 +16,7 @@ export interface DetailedPokemonService {
 export function useDetailedPokemonsService(): DetailedPokemonService {
   function getPokemonsDetailedInfo(summarizedPokemons: SummaryPokemon[]) {
     detailedPokemonsStore.setLoading(true);
+    const { detailedPokemons: currentState } = detailedPokemonsStore.getValue();
     const urls = summarizedPokemons.map((item) => item.pokemon.url);
     const requests = urls.map((url) => API.get<GetDetailedPokemonDTO>(url));
     const subscription = API.all<GetDetailedPokemonDTO>(requests)
@@ -26,7 +28,9 @@ export function useDetailedPokemonsService(): DetailedPokemonService {
       )
       .subscribe((responses) => {
         const _detailedPokemons = responses.map((resp) => resp.data);
-        addDetailedPokemonsToStore(_detailedPokemons);
+        if (!isEqual(_detailedPokemons, currentState)) {
+          addDetailedPokemonsToStore(_detailedPokemons);
+        }
       });
   }
 

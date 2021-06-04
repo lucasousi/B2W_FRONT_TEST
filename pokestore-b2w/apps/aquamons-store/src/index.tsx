@@ -2,9 +2,14 @@ import './index.scss';
 
 import ReactDOM from 'react-dom';
 
+import { enableAkitaProdMode, persistState } from '@datorama/akita';
+
 import { App } from './app/app';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+
+enableAkitaProdMode();
+persistState();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

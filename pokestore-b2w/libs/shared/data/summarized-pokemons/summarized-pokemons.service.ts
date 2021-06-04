@@ -1,6 +1,5 @@
+import { isEqual } from 'lodash';
 import { finalize } from 'rxjs/operators';
-
-import { getLimitedRandonNumber } from '@shared/helpers';
 
 import { GetPokemonByTypeDTO } from '../../entities/dtos/get-pokemon-by-type.dto';
 import { API } from '../../service/service.factory';
@@ -13,6 +12,7 @@ export interface SummarizedPokemonsService {
 export function useSummarizedPokemonsService(): SummarizedPokemonsService {
   function getSummarizedPokemons(pokemonTypeID: number): void {
     summarizedPokemonsStore.setLoading(true);
+    const { summarizedPokemons: currentState } = summarizedPokemonsStore.getValue();
     const subscription = API.get<GetPokemonByTypeDTO>(`type/${pokemonTypeID}`)
       .pipe(
         finalize(() => {
@@ -21,9 +21,11 @@ export function useSummarizedPokemonsService(): SummarizedPokemonsService {
         })
       )
       .subscribe(({ data: { pokemon } }) => {
-        summarizedPokemonsStore.update({
-          summarizedPokemons: pokemon,
-        });
+        if (!isEqual(pokemon, currentState)) {
+          summarizedPokemonsStore.update({
+            summarizedPokemons: pokemon,
+          });
+        }
       });
   }
 
