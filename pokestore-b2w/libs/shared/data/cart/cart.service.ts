@@ -4,14 +4,14 @@ import {
 } from './cart.store';
 
 export interface CartService {
-  setOpen: (value: boolean) => void;
+  setOpenCart: (value: boolean) => void;
   addItemToCart: (item: PokemonViewModel) => void;
   removeItemFromCart: (item: PokemonViewModel) => void;
   clearCart: () => void;
 }
 
 export function useCartService(): CartService {
-  function setOpen(value: boolean) {
+  function setOpenCart(value: boolean) {
     setOpenToCartStore(value);
   }
 
@@ -27,5 +27,5 @@ export function useCartService(): CartService {
     cartStore.reset();
   }
 
-  return { setOpen, addItemToCart, removeItemFromCart, clearCart };
+  return { setOpenCart, addItemToCart, removeItemFromCart, clearCart };
 }

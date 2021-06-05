@@ -4,12 +4,19 @@ import PokeStoreLogo from '@aquamons-store/assets/logo.png';
 import WaterLogo from '@aquamons-store/assets/water-icon.svg';
 import { Grid } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
+import { useCartService } from '@shared/data';
 
 export interface HeaderProps {
   pageTitle: string;
 }
 
 export const Header = ({ pageTitle }: HeaderProps) => {
+  const { setOpenCart } = useCartService();
+
+  function handleOpenCart() {
+    setOpenCart(true);
+  }
+
   return (
     <header className="header-container flex items-center">
       <div className="container mx-auto px-5">
@@ -24,7 +31,7 @@ export const Header = ({ pageTitle }: HeaderProps) => {
               iconName="shopping_cart"
               className="cart-icon"
               tooltipDescription="Carrinho"
-              onClick={() => alert('Falta implementar')}
+              onClick={() => handleOpenCart()}
             />
           </Grid>
         </Grid>

@@ -1,19 +1,39 @@
 import './cart-drawer.scss';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Subscription } from 'rxjs';
 
 import { Button, Divider, Drawer } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
+import { useCartQuery, useCartService } from '@shared/data';
+import { PokemonViewModel } from '@shared/entities/view-models';
 
 export const CartDrawer = () => {
-  const [open, setOpen] = useState(true);
+  const { open$, items$ } = useCartQuery();
+  const { setOpenCart } = useCartService();
+  const [open, setOpen] = useState(false);
+  const [items, setItems] = useState<PokemonViewModel[]>([]);
 
-  function handleDrawerOpen() {
-    setOpen(true);
+  useEffect(() => {
+    const subscription1 = subscribeOpenStatusChange();
+    const subscription2 = subscribeItemsChange();
+
+    return function cleanup() {
+      subscription1.unsubscribe();
+      subscription2.unsubscribe();
+    };
+  }, []);
+
+  function subscribeOpenStatusChange(): Subscription {
+    return open$.subscribe((value) => setOpen(value));
+  }
+
+  function subscribeItemsChange(): Subscription {
+    return items$.subscribe((items) => setItems(items));
   }
 
   function handleDrawerClose() {
-    setOpen(false);
+    setOpenCart(false);
   }
 
   return (
