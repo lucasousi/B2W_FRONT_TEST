@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import nprogress from 'nprogress';
-import { from, Observable, ObservableInput, zip } from 'rxjs';
+import { toast } from 'react-toastify';
+import { from, Observable, zip } from 'rxjs';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -36,7 +37,7 @@ function handleResponseWithError(error: AxiosError) {
   const msgError = errorCodes.includes(responseCode)
     ? 'Houve um problema com a chamada na API'
     : 'Ocorreu um problema desconhecido';
-  //   toast.error(msgError);
+  toast.error(msgError);
   return error;
 }
 

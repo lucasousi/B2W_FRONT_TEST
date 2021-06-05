@@ -1,10 +1,13 @@
 import './header.scss';
 
+import { useEffect, useState } from 'react';
+import { Subscription } from 'rxjs';
+
 import PokeStoreLogo from '@aquamons-store/assets/logo.png';
 import WaterLogo from '@aquamons-store/assets/water-icon.svg';
 import { Grid } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
-import { useCartService } from '@shared/data';
+import { useCartQuery, useCartService } from '@shared/data';
 
 export interface HeaderProps {
   pageTitle: string;
@@ -12,9 +15,23 @@ export interface HeaderProps {
 
 export const Header = ({ pageTitle }: HeaderProps) => {
   const { setOpenCart } = useCartService();
+  const { items$ } = useCartQuery();
+  const [itemsCount, setItemsCount] = useState(0);
+
+  useEffect(() => {
+    const subscription1 = subscribeItemsChange();
+
+    return function cleanup() {
+      subscription1.unsubscribe();
+    };
+  }, []);
 
   function handleOpenCart() {
     setOpenCart(true);
+  }
+
+  function subscribeItemsChange(): Subscription {
+    return items$.subscribe((items) => setItemsCount(items.length));
   }
 
   return (
@@ -31,6 +48,8 @@ export const Header = ({ pageTitle }: HeaderProps) => {
               iconName="shopping_cart"
               className="cart-icon"
               tooltipDescription="Carrinho"
+              badgeCount={itemsCount}
+              badgeColor="primary"
               onClick={() => handleOpenCart()}
             />
           </Grid>

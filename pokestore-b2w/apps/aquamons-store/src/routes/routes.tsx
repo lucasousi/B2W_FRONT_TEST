@@ -17,13 +17,13 @@ const navigableRoutes: RouteProps[] = [
 
 export const Routes = () => {
   return (
-    <Suspense fallback={<></>}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Suspense fallback={<></>}>
         <Switch>
           {!!navigableRoutes?.length &&
             navigableRoutes.map((route, index) => <CustomRoute key={index} {...route}></CustomRoute>)}
         </Switch>
-      </BrowserRouter>
-    </Suspense>
+      </Suspense>
+    </BrowserRouter>
   );
 };

@@ -3,6 +3,7 @@ import './pokemon-card.scss';
 import clsx from 'clsx';
 import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Subscription } from 'rxjs';
 
 import {
@@ -40,7 +41,7 @@ export interface PokemonCardProps {
 export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
   const maxInstallments = 10;
   const classes = useStyles();
-  const { addItemToCart, removeItemFromCart, setOpenCart } = useCartService();
+  const { addItemToCart, removeItemFromCart } = useCartService();
   const { items$ } = useCartQuery();
   const [expanded, setExpanded] = useState(false);
   const [itemsOnCart, setItemsOnCart] = useState<PokemonViewModel[]>([]);
@@ -73,7 +74,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
 
   function handleBuyPokemon(pokemon: PokemonViewModel) {
     addItemToCart(pokemon);
-    setOpenCart(true);
+    toast('Pokémon inserido no carrinho');
   }
 
   function handleUnbuyPokemon(pokemon: PokemonViewModel) {
@@ -86,7 +87,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
         avatar={
           <img src={formattedPokemon.sprites.front_default} alt={formattedPokemon.name} width="96px" height="96px" />
         }
-        title={<h4 className="lead-color">{toTitleCase(formattedPokemon.name)}</h4>}
+        title={<h4 className="lead-color mb-2">{toTitleCase(formattedPokemon.name)}</h4>}
         subheader={
           <div className="flex flex-col">
             <span className="lead-color pokemon-price">R$ {applyMaskMoneyBR(formattedPokemon.price, true)}</span>
