@@ -79,6 +79,17 @@ export const AquamonsStoreHome = () => {
     getPokemonsDetailedInfo(paginatedSummarizedPokemons);
   }
 
+  function handleAutocompleteChange(value: SummaryPokemon[]) {
+    const selectedSummarizedPokemons = value;
+    const newCurrentPage = 1;
+    setCurrentPage(newCurrentPage);
+    if (selectedSummarizedPokemons.length) {
+      getPaginatedPokemons(selectedSummarizedPokemons, 0, newCurrentPage);
+    } else {
+      getPaginatedPokemons(summarizedPokemons, 0, newCurrentPage);
+    }
+  }
+
   return (
     <section className="home-container container mx-auto px-5 py-10">
       <Grid container spacing={3} className="home-container__grid flex justify-center">
@@ -91,16 +102,18 @@ export const AquamonsStoreHome = () => {
           <Autocomplete
             multiple
             className="home-container__search-bar"
+            noOptionsText="Nenhum pokémon encontrado"
             options={summarizedPokemons}
             getOptionLabel={(option) => option.pokemon.name}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Pesquisar pokémon pelo nome"
+                label="Pesquisar pokémons pelo nome"
                 variant="outlined"
                 placeholder="Pesquise pelo nome de um pókemon específico..."
               />
             )}
+            onChange={(event, value) => handleAutocompleteChange(value)}
           />
         </Grid>
 
