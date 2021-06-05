@@ -5,7 +5,7 @@ import { CartDrawer, Header } from '@shared/components';
 
 import { Routes } from '../routes/routes';
 
-export function App() {
+export const App = () => {
   return (
     <div className="app-root grid-cols-1">
       <Header pageTitle="Aquamons Store" />
@@ -15,4 +15,4 @@ export function App() {
       </main>
     </div>
   );
-}
+};
