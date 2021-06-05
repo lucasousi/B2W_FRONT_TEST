@@ -3,7 +3,7 @@ import { finalize } from 'rxjs/operators';
 
 import { GetDetailedPokemonDTO, SummaryPokemon } from '../../entities/dtos';
 import { PokemonViewModel } from '../../entities/view-models/pokemon.view-model';
-import { getLimitedRandonNumber } from '../../helpers';
+import { getLimitedRandonNumber, toTitleCase } from '../../helpers';
 import { API } from '../../service/service.factory';
 import { addDetailedPokemonsToStore, detailedPokemonsStore } from './detailed-pokemon.store';
 
@@ -29,7 +29,10 @@ export function useDetailedPokemonsService(): DetailedPokemonService {
         const { detailedPokemons: currentDetailedPokemons } = detailedPokemonsStore.getValue();
         const currentDetailedPokemonsWithoutPrice = clearPriceFromDetailedPokemonsOnStorage(currentDetailedPokemons);
         if (!isEqual(newDetailedPokemons, currentDetailedPokemonsWithoutPrice)) {
-          newDetailedPokemons.forEach((item) => (item.price = getLimitedRandonNumber(100, 1000)));
+          newDetailedPokemons.forEach((item) => {
+            item.name = toTitleCase(item.name);
+            item.price = getLimitedRandonNumber(100, 1000);
+          });
           addDetailedPokemonsToStore(newDetailedPokemons);
         }
       });

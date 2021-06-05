@@ -3,8 +3,9 @@ import './aquamons-store-home.scss';
 import { useEffect, useState } from 'react';
 import { Subscription } from 'rxjs';
 
-import { Grid } from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
+import { Chip, Grid } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import { Autocomplete, Skeleton } from '@material-ui/lab';
 import { PokemonCard } from '@shared/components';
 import {
     useDetailedPokemonsQuery, useDetailedPokemonsService, useSummarizedPokemonsQuery,
@@ -24,7 +25,9 @@ export const AquamonsStoreHome = () => {
   const { detailedPokemons$, isLoading$ } = useDetailedPokemonsQuery();
 
   const [isLoadingDetailedPokemons, setIsLoadingDetailedPokemons] = useState(false);
-  const [formattedPokemons, setFormattedPokemons] = useState<PokemonViewModel[]>();
+  const [summarizedPokemons, setSummarizedPokemons] = useState<SummaryPokemon[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<SummaryPokemon[]>([]);
+  const [formattedPokemons, setFormattedPokemons] = useState<PokemonViewModel[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -42,6 +45,7 @@ export const AquamonsStoreHome = () => {
 
   function subscribeSummarizedPokemonsChanges(): Subscription {
     return summarizedPokemons$.subscribe((value) => {
+      setSummarizedPokemons(value);
       if (value.length) {
         getPaginatedPokemons(value, 0, currentPage);
       }
@@ -81,6 +85,23 @@ export const AquamonsStoreHome = () => {
         <Grid item xs={12} className="home-container__title__subtitle">
           <h2 className="lead-color">Loja de pokémons do tipo Água</h2>
           <span className="gray-color">Aqui você encontra os principais pokémons aquáticos para sua pokedéx.</span>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Autocomplete
+            multiple
+            className="home-container__search-bar"
+            options={summarizedPokemons}
+            getOptionLabel={(option) => option.pokemon.name}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Pesquisar pokémon pelo nome"
+                variant="outlined"
+                placeholder="Pesquise pelo nome de um pókemon específico..."
+              />
+            )}
+          />
         </Grid>
 
         {isLoadingDetailedPokemons

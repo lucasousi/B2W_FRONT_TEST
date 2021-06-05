@@ -74,12 +74,12 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
 
   function handleBuyPokemon(pokemon: PokemonViewModel) {
     addItemToCart(pokemon);
-    toast(`${toTitleCase(pokemon.name)} inserido no carrinho!`);
+    toast(`${pokemon.name} inserido no carrinho!`);
   }
 
   function handleUnbuyPokemon(pokemon: PokemonViewModel) {
     removeItemFromCart(pokemon);
-    toast.dark(`${toTitleCase(pokemon.name)} removido do carrinho.`);
+    toast.dark(`${pokemon.name} removido do carrinho.`);
   }
 
   return formattedPokemon ? (
@@ -88,7 +88,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
         avatar={
           <img src={formattedPokemon.sprites.front_default} alt={formattedPokemon.name} width="96px" height="96px" />
         }
-        title={<h4 className="lead-color mb-2">{toTitleCase(formattedPokemon.name)}</h4>}
+        title={<h4 className="lead-color mb-2">{formattedPokemon.name}</h4>}
         subheader={
           <div className="flex flex-col">
             <span className="lead-color pokemon-price">R$ {applyMaskMoneyBR(formattedPokemon.price, true)}</span>
