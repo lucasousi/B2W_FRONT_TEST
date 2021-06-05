@@ -46,6 +46,11 @@ export const CartDrawer = () => {
         <h3>Seu Carrinho</h3>
       </div>
       <Divider />
+      {items.map((item, index) => (
+        <div key={index} className="cart-drawer__item">
+          {item.name} - {item.price}
+        </div>
+      ))}
       <div className="cart-drawer__footer p-2">
         <Button variant="contained" color="primary">
           Finalizar

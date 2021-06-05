@@ -18,5 +18,5 @@ export const detailedPokemonsStore = createEntityStore<DetailedPokemonState>(get
 export function addDetailedPokemonsToStore(newDetailedPokemons: GetDetailedPokemonDTO[]) {
   detailedPokemonsStore.update({
     detailedPokemons: [...newDetailedPokemons],
-  });
+  } as DetailedPokemonState);
 }

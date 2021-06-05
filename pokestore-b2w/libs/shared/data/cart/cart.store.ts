@@ -26,17 +26,23 @@ export function setOpenToCartStore(value: boolean) {
 }
 
 export function addItemToCartStore(newItem: PokemonViewModel) {
-  cartStore.update(({ open: currentStateOpen, items: currentStateItems }) => ({
-    open: currentStateOpen,
-    itens: arrayAdd(currentStateItems, newItem),
-  }));
+  cartStore.update(
+    (currentState) =>
+      ({
+        open: currentState.open,
+        items: arrayAdd(currentState.items, newItem),
+      } as CartState)
+  );
 }
 
 export function removeItemFromCartStore(item: PokemonViewModel) {
-  cartStore.update(({ open: currentStateOpen, items: currentStateItems }) => ({
-    open: currentStateOpen,
-    itens: arrayRemove<PokemonViewModel[], PokemonViewModel>(currentStateItems, (currentStateArrayItem) =>
-      isEqual(currentStateArrayItem, item)
-    ),
-  }));
+  cartStore.update(
+    (currentState) =>
+      ({
+        open: currentState.open,
+        items: arrayRemove<PokemonViewModel[], PokemonViewModel>(currentState.items, (currentStateArrayItem) =>
+          isEqual(currentStateArrayItem, item)
+        ),
+      } as CartState)
+  );
 }

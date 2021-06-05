@@ -1,26 +1,18 @@
 import './pokemon-card.scss';
 
 import clsx from 'clsx';
-import { useState } from 'react';
+import { isEqual } from 'lodash';
+import { useEffect, useState } from 'react';
+import { Subscription } from 'rxjs';
 
 import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Collapse,
-  createStyles,
-  makeStyles,
-  Theme,
+    Button, Card, CardActions, CardContent, CardHeader, Collapse, createStyles, makeStyles, Theme
 } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
+import { useCartQuery, useCartService } from '@shared/data';
 import { PokemonViewModel } from '@shared/entities/view-models';
 import {
-  applyMaskMoneyBR,
-  convertDecimeterToCentimeter,
-  convertHectogramToKilogram,
-  toTitleCase,
+    applyMaskMoneyBR, convertDecimeterToCentimeter, convertHectogramToKilogram, toTitleCase
 } from '@shared/helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -48,7 +40,26 @@ export interface PokemonCardProps {
 export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
   const maxInstallments = 10;
   const classes = useStyles();
+  const { addItemToCart, removeItemFromCart, setOpenCart } = useCartService();
+  const { items$ } = useCartQuery();
   const [expanded, setExpanded] = useState(false);
+  const [itemsOnCart, setItemsOnCart] = useState<PokemonViewModel[]>([]);
+
+  useEffect(() => {
+    const subscription1 = subscribeItemsChange();
+
+    return function cleanup() {
+      subscription1.unsubscribe();
+    };
+  }, []);
+
+  function subscribeItemsChange(): Subscription {
+    return items$.subscribe((items) => setItemsOnCart(items));
+  }
+
+  function isPokemonOnCart(pokemon: PokemonViewModel) {
+    return itemsOnCart?.find((item) => isEqual(item, pokemon));
+  }
 
   function getFormattedInstallmentRealValue(value: number) {
     const installmentValue = value / maxInstallments;
@@ -58,6 +69,15 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
 
   function handleExpandClick() {
     setExpanded(!expanded);
+  }
+
+  function handleBuyPokemon(pokemon: PokemonViewModel) {
+    addItemToCart(pokemon);
+    setOpenCart(true);
+  }
+
+  function handleUnbuyPokemon(pokemon: PokemonViewModel) {
+    removeItemFromCart(pokemon);
   }
 
   return formattedPokemon ? (
@@ -79,13 +99,25 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
 
       <CardActions disableSpacing className="pokemon-card__actions">
         <div className="pokemon-card__actions__left">
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<span className="material-icons-outlined">add_shopping_cart</span>}
-          >
-            Comprar
-          </Button>
+          {isPokemonOnCart(formattedPokemon) ? (
+            <Button
+              variant="outlined"
+              color="secondary"
+              startIcon={<span className="material-icons-outlined">remove_shopping_cart</span>}
+              onClick={() => handleUnbuyPokemon(formattedPokemon)}
+            >
+              Remover
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              color="primary"
+              startIcon={<span className="material-icons-outlined">add_shopping_cart</span>}
+              onClick={() => handleBuyPokemon(formattedPokemon)}
+            >
+              Comprar
+            </Button>
+          )}
         </div>
         <div className="pokemon-card__actions__right">
           <IconButton iconName="auto_stories" iconType="two-tone" tooltipDescription="Ver dossiê pokémon" />
