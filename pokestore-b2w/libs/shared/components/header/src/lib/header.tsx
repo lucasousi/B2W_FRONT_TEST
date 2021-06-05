@@ -49,7 +49,7 @@ export const Header = ({ pageTitle }: HeaderProps) => {
               className="cart-icon"
               tooltipDescription="Carrinho"
               badgeCount={itemsCount}
-              badgeColor="primary"
+              badgeColor="secondary"
               onClick={() => handleOpenCart()}
             />
           </Grid>

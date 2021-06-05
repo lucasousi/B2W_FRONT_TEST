@@ -2,9 +2,17 @@
 @use '../styles/variables.scss' as variables;
 
 .app-root {
-  background-color: colors.$background-color-gray;
+  position: relative;
+  height: 100vh;
+  max-height: 100vh;
 
   .app-main {
+    position: absolute;
+    top: variables.$header-height;
+    width: 100%;
+    background-color: colors.$background-color-gray;
     min-height: calc(100vh - #{variables.$header-height});
+    overflow-y: scroll;
+    height: 100px;
   }
 }

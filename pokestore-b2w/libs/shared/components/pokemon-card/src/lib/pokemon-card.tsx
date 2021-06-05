@@ -79,6 +79,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
 
   function handleUnbuyPokemon(pokemon: PokemonViewModel) {
     removeItemFromCart(pokemon);
+    toast.warn('Pokémon removido no carrinho');
   }
 
   return formattedPokemon ? (

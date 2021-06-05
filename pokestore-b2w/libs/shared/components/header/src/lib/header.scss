@@ -1,6 +1,10 @@
 @use '@styles/variables.scss' as variables;
 
 .header-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
   height: variables.$header-height;
   background-color: white;
   box-shadow: variables.$awesome-box-shadow;

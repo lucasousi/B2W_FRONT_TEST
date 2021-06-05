@@ -7,17 +7,15 @@ import { Grid } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { PokemonCard } from '@shared/components';
 import {
-  useDetailedPokemonsQuery,
-  useDetailedPokemonsService,
-  useSummarizedPokemonsQuery,
-  useSummarizedPokemonsService,
+    useDetailedPokemonsQuery, useDetailedPokemonsService, useSummarizedPokemonsQuery,
+    useSummarizedPokemonsService
 } from '@shared/data';
 import { SummaryPokemon } from '@shared/entities/dtos';
 import { PokemonViewModel } from '@shared/entities/view-models';
 
 export const AquamonsStoreHome = () => {
   const aquaTypeID = 11;
-  const pokemonsPerPage = 12;
+  const pokemonsPerPage = 16;
   const fakeArrayToLoadingSkeleton = [...Array(pokemonsPerPage).keys()];
 
   const { getSummarizedPokemons } = useSummarizedPokemonsService();
@@ -78,7 +76,7 @@ export const AquamonsStoreHome = () => {
   }
 
   return (
-    <section className="home-container container mx-auto px-5 py-20">
+    <section className="home-container container mx-auto px-5 py-10">
       <Grid container spacing={3} className="home-container__grid flex justify-center">
         <Grid item xs={12} className="home-container__title__subtitle">
           <h2 className="lead-color">Loja de pokémons do tipo Água</h2>
