@@ -11,7 +11,8 @@ const AquamonsStoreHome = lazy(() =>
 
 const navigableRoutes: RouteProps[] = [
   { path: '/', exact: true, component: () => <Redirect to="/home" /> },
-  { path: '/home', component: AquamonsStoreHome },
+  { path: '/home', exact: true, component: AquamonsStoreHome },
+  { component: () => <Redirect to="/home" /> },
 ];
 
 export const Routes = () => {
@@ -20,9 +21,7 @@ export const Routes = () => {
       <BrowserRouter>
         <Switch>
           {!!navigableRoutes?.length &&
-            navigableRoutes.map((route, index) => (
-              <CustomRoute key={index} {...route}></CustomRoute>
-            ))}
+            navigableRoutes.map((route, index) => <CustomRoute key={index} {...route}></CustomRoute>)}
         </Switch>
       </BrowserRouter>
     </Suspense>

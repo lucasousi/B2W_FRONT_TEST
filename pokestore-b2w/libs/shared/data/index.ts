@@ -4,3 +4,6 @@ export * from './summarized-pokemons/summarized-pokemons.service';
 export * from './detailed-pokemons/detailed-pokemon.store';
 export * from './detailed-pokemons/detailed-pokemon.query';
 export * from './detailed-pokemons/detailed-pokemon.service';
+export * from './cart/cart.store';
+export * from './cart/cart.query';
+export * from './cart/cart.service';

@@ -10,7 +10,7 @@ export const App = () => {
     <div className="app-root grid-cols-1">
       <Header pageTitle="Aquamons Store" />
       <main className="app-main">
-        {/* <CartDrawer /> */}
+        <CartDrawer />
         <Routes />
       </main>
     </div>
