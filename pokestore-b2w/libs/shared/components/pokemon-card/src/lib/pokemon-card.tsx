@@ -74,12 +74,12 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
 
   function handleBuyPokemon(pokemon: PokemonViewModel) {
     addItemToCart(pokemon);
-    toast('Pokémon inserido no carrinho');
+    toast(`${toTitleCase(pokemon.name)} inserido no carrinho!`);
   }
 
   function handleUnbuyPokemon(pokemon: PokemonViewModel) {
     removeItemFromCart(pokemon);
-    toast.warn('Pokémon removido no carrinho');
+    toast.dark(`${toTitleCase(pokemon.name)} removido do carrinho.`);
   }
 
   return formattedPokemon ? (
