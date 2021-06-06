@@ -1,11 +1,12 @@
 import './aquamons-store-home.scss';
 
+import { max, min } from 'lodash';
 import { useEffect, useState } from 'react';
 import { Subscription } from 'rxjs';
 
-import { Chip, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import { Autocomplete, Skeleton } from '@material-ui/lab';
+import { Autocomplete, Pagination, Skeleton } from '@material-ui/lab';
 import { PokemonCard } from '@shared/components';
 import {
     useDetailedPokemonsQuery, useDetailedPokemonsService, useSummarizedPokemonsQuery,
@@ -26,9 +27,10 @@ export const AquamonsStoreHome = () => {
 
   const [isLoadingDetailedPokemons, setIsLoadingDetailedPokemons] = useState(false);
   const [summarizedPokemons, setSummarizedPokemons] = useState<SummaryPokemon[]>([]);
-  const [filteredPokemons, setFilteredPokemons] = useState<SummaryPokemon[]>([]);
   const [formattedPokemons, setFormattedPokemons] = useState<PokemonViewModel[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<SummaryPokemon[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
     const subscription1 = subscribeSummarizedPokemonsChanges();
@@ -46,8 +48,9 @@ export const AquamonsStoreHome = () => {
   function subscribeSummarizedPokemonsChanges(): Subscription {
     return summarizedPokemons$.subscribe((value) => {
       setSummarizedPokemons(value);
+      calcPageCount(value, pokemonsPerPage);
       if (value.length) {
-        getPaginatedPokemons(value, 0, currentPage);
+        getPaginatedPokemons(value, currentPage);
       }
     });
   }
@@ -70,24 +73,45 @@ export const AquamonsStoreHome = () => {
     });
   }
 
-  function getPaginatedPokemons(allPokemons: SummaryPokemon[], currentPage: number, nextPage: number): void {
-    const fromRangeValue = currentPage * pokemonsPerPage;
-    const toRangeValue = nextPage * pokemonsPerPage;
+  function getPaginatedPokemons(allPokemons: SummaryPokemon[], page: number): void {
+    const fromRangeValue = (page - 1) * pokemonsPerPage;
+    const toRangeValue = page * pokemonsPerPage;
     const _summarizedPokemons = allPokemons;
 
-    const paginatedSummarizedPokemons = _summarizedPokemons.slice(fromRangeValue, toRangeValue);
+    // Útil quando usuário retorna de uma página maior para uma menor
+    const startSliceValue = min([toRangeValue, fromRangeValue]);
+    const endSliceValue = max([toRangeValue, fromRangeValue]);
+
+    const paginatedSummarizedPokemons = _summarizedPokemons.slice(startSliceValue, endSliceValue);
     getPokemonsDetailedInfo(paginatedSummarizedPokemons);
   }
 
   function handleAutocompleteChange(value: SummaryPokemon[]) {
-    const selectedSummarizedPokemons = value;
+    const filteredSummarizedPokemons = value;
     const newCurrentPage = 1;
     setCurrentPage(newCurrentPage);
-    if (selectedSummarizedPokemons.length) {
-      getPaginatedPokemons(selectedSummarizedPokemons, 0, newCurrentPage);
+    if (filteredSummarizedPokemons.length) {
+      setFilteredPokemons(filteredSummarizedPokemons);
+      calcPageCount(value, pokemonsPerPage);
+      getPaginatedPokemons(filteredSummarizedPokemons, newCurrentPage);
     } else {
-      getPaginatedPokemons(summarizedPokemons, 0, newCurrentPage);
+      setFilteredPokemons([]);
+      calcPageCount(summarizedPokemons, pokemonsPerPage);
+      getPaginatedPokemons(summarizedPokemons, newCurrentPage);
     }
+  }
+
+  function calcPageCount(allPokemons: SummaryPokemon[], maxPokemonsPerPage: number): void {
+    const newCurrentPage = 1;
+    setCurrentPage(newCurrentPage);
+    const _pageCount = Math.ceil(allPokemons.length / maxPokemonsPerPage);
+    setPageCount(_pageCount);
+  }
+
+  function handlePageChange(newPageNumber: number): void {
+    setCurrentPage(newPageNumber);
+    const _pokemonsToPaginate = filteredPokemons?.length ? filteredPokemons : summarizedPokemons;
+    getPaginatedPokemons(_pokemonsToPaginate, newPageNumber);
   }
 
   return (
@@ -115,6 +139,10 @@ export const AquamonsStoreHome = () => {
             )}
             onChange={(event, value) => handleAutocompleteChange(value)}
           />
+        </Grid>
+
+        <Grid item xs={12} className="flex justify-end">
+          <Pagination page={currentPage} count={pageCount} onChange={(event, newPage) => handlePageChange(newPage)} />
         </Grid>
 
         {isLoadingDetailedPokemons
