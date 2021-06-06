@@ -93,7 +93,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
           <div className="flex flex-col">
             <span className="lead-color pokemon-price">R$ {applyMaskMoneyBR(formattedPokemon.price, true)}</span>
             <span className="iron-color">
-              10x de R$ {getFormattedInstallmentRealValue(formattedPokemon.price)} s/ juros.
+              {maxInstallments}x de R$ {getFormattedInstallmentRealValue(formattedPokemon.price)} s/ juros.
             </span>
           </div>
         }

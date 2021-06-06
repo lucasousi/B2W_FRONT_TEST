@@ -1,7 +1,7 @@
 @use '@styles/variables.scss' as variables;
 
 .cart-drawer {
-  &__header {
-    width: 30vw;
+  &__grid {
+    width: 30vw !important;
   }
 }
