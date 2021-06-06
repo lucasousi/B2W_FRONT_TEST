@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Redirect, RouteProps, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, RouteProps, Switch } from 'react-router-dom';
 
 import { CustomRoute } from './custom-route';
 
@@ -17,13 +17,13 @@ const navigableRoutes: RouteProps[] = [
 
 export const Routes = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Suspense fallback={<></>}>
         <Switch>
           {!!navigableRoutes?.length &&
             navigableRoutes.map((route, index) => <CustomRoute key={index} {...route}></CustomRoute>)}
         </Switch>
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
