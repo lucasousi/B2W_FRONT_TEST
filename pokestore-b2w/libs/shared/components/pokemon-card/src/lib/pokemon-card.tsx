@@ -88,7 +88,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
         avatar={
           <img src={formattedPokemon.sprites.front_default} alt={formattedPokemon.name} width="96px" height="96px" />
         }
-        title={<h4 className="lead-color mb-2">{formattedPokemon.name}</h4>}
+        title={<span className="lead-color mb-2 pokemon-card__name">{formattedPokemon.name}</span>}
         subheader={
           <div className="flex flex-col">
             <span className="lead-color pokemon-price">{applyMaskMoneyBR(formattedPokemon.price)}</span>
