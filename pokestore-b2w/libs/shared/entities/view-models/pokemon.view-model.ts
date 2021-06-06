@@ -1,13 +1,10 @@
-import { AbilityInfo, MoveInfo, Sprites } from '../dtos/get-detailed-pokemon.dto';
-import { NameUrlRelation } from '../dtos/name-url-relation';
+import { AbilityInfo, Sprites } from '../dtos/get-detailed-pokemon.dto';
 
 export interface PokemonViewModel {
   abilities: AbilityInfo[];
   height: number;
-  moves: MoveInfo[];
   name: string;
-  species: NameUrlRelation;
-  sprites: Sprites;
+  sprites: Pick<Sprites, 'front_default'>;
   weight: number;
   price: number;
 }

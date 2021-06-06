@@ -3,21 +3,21 @@ import { NameUrlRelation } from '../dtos';
 export interface GetDetailedPokemonDTO {
   abilities: AbilityInfo[];
   base_experience: number;
-  forms: NameUrlRelation[];
-  game_indices: Gameindex[];
+  forms?: NameUrlRelation[];
+  game_indices?: Gameindex[];
   height: number;
-  held_items: any[];
+  held_items?: any[];
   id: number;
   is_default: boolean;
   location_area_encounters: string;
   moves: MoveInfo[];
   name: string;
   order: number;
-  past_types: any[];
+  past_types?: any[];
   species: NameUrlRelation;
   sprites: Sprites;
-  stats: Stat[];
-  types: Type[];
+  stats?: Stat[];
+  types?: Type[];
   weight: number;
   price?: number;
 }
