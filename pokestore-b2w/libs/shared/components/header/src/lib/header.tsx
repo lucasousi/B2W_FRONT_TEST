@@ -39,7 +39,7 @@ export const Header = ({ pageTitle }: HeaderProps) => {
       <div className="container mx-auto px-5">
         <Grid container spacing={1} className="flex items-center">
           <Grid item xs={5} className="flex">
-            <img src={PokeStoreLogo} className="mr-3" width="175px" height="50px" alt="logo" />
+            <img src={PokeStoreLogo} className="mr-3" width="189px" height="50px" alt="logo" />
             <img src={WaterLogo} className="mr-3" width="50px" height="50px" alt="logo" />
           </Grid>
           <Grid item xs={5}></Grid>

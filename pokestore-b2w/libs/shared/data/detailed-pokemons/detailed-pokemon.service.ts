@@ -30,7 +30,6 @@ export function useDetailedPokemonsService(): DetailedPokemonService {
         const newDetailedPokemons = responses.map(({ data }) => data);
         const formattedNewDetailedPokemons = getFormattedDetailedPokemons(newDetailedPokemons, _summarizedPokemons);
         const currentDetailedPokemonsWithoutPrice = clearPriceFromDetailedPokemonsOnStorage(currentDetailedPokemons);
-        debugger;
         if (!isEqual(formattedNewDetailedPokemons, currentDetailedPokemonsWithoutPrice)) {
           addDetailedPokemonsToStore(formattedNewDetailedPokemons);
         }
