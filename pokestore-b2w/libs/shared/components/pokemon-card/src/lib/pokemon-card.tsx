@@ -62,8 +62,8 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
     return itemsOnCart?.find((item) => isEqual(item, pokemon));
   }
 
-  function getFormattedInstallmentRealValue(value: number) {
-    const installmentValue = value / maxInstallments;
+  function getFormattedInstallmentRealValue(value?: number) {
+    const installmentValue = (value || 0) / maxInstallments;
 
     return applyMaskMoneyBR(installmentValue);
   }

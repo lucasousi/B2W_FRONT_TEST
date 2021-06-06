@@ -19,7 +19,7 @@ export function getLimitedRandonNumber(minValue: number, maxValue: number) {
   return Number((Math.random() * (maxValue - minValue) + minValue).toFixed(2));
 }
 
-export function applyMaskMoneyBR(value: number, hiddenSymbol?: boolean) {
+export function applyMaskMoneyBR(value?: number, hiddenSymbol?: boolean) {
   return value === null || value === undefined
     ? '-'
     : hiddenSymbol

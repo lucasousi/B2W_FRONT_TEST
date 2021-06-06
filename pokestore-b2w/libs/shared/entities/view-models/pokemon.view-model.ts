@@ -6,5 +6,5 @@ export interface PokemonViewModel {
   name: string;
   sprites: Pick<Sprites, 'front_default'>;
   weight: number;
-  price: number;
+  price?: number;
 }
