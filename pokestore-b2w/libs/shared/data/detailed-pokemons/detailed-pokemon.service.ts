@@ -3,7 +3,7 @@ import { finalize } from 'rxjs/operators';
 
 import { GetDetailedPokemonDTO, SummaryPokemon } from '../../entities/dtos';
 import { PokemonViewModel } from '../../entities/view-models/pokemon.view-model';
-import { getLimitedRandonNumber, toTitleCase } from '../../helpers';
+import { toTitleCase } from '../../helpers';
 import { API } from '../../service/service.factory';
 import { addDetailedPokemonsToStore, detailedPokemonsStore } from './detailed-pokemon.store';
 

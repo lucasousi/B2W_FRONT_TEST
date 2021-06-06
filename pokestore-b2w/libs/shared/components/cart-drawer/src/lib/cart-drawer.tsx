@@ -6,18 +6,28 @@ import { toast } from 'react-toastify';
 import { Subscription } from 'rxjs';
 
 import SadPikachu from '@aquamons-store/assets/sad-pikachu.gif';
-import { Button, Divider, Drawer, Grid } from '@material-ui/core';
+import {
+    Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer,
+    Grid
+} from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IconButton, MaterialIcon } from '@shared/components';
 import { useCartQuery, useCartService } from '@shared/data';
 import { PokemonViewModel } from '@shared/entities/view-models';
-import { applyMaskMoneyBR } from '@shared/helpers';
+import { applyMaskMoneyBR, getLimitedRandonNumber } from '@shared/helpers';
 
 export const CartDrawer = () => {
   const maxInstallments = 10;
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const { open$, items$ } = useCartQuery();
   const { setOpenCart, removeItemFromCart } = useCartService();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<PokemonViewModel[]>([]);
+  const [totalSum, setTotalSum] = useState(0);
+  const [cashback, setCashback] = useState(0);
+  const [openCashbackDialog, setOpenCashbackDialog] = useState(false);
 
   useEffect(() => {
     const subscription1 = subscribeOpenStatusChange();
@@ -34,21 +44,42 @@ export const CartDrawer = () => {
   }
 
   function subscribeItemsChange(): Subscription {
-    return items$.subscribe((items) => setItems(items));
+    return items$.subscribe((items) => {
+      setItems(items);
+      calcTotalSum(items);
+    });
   }
 
-  function handleDrawerClose() {
+  function handleDrawerClose(): void {
     setOpenCart(false);
   }
 
-  function getTotalSum(pokemons: PokemonViewModel[]) {
+  function calcTotalSum(pokemons: PokemonViewModel[]): void {
     const prices = pokemons.map((item) => item.price);
-    return sum(prices);
+    const _totalSum = sum(prices);
+    setTotalSum(_totalSum);
+    calcCashback(_totalSum);
+  }
+
+  function calcCashback(total: number) {
+    setCashback(getLimitedRandonNumber(1, total / 3));
   }
 
   function handleUnbuyPokemon(pokemon: PokemonViewModel) {
     removeItemFromCart(pokemon);
     toast.dark(`${pokemon.name} removido do carrinho.`);
+  }
+
+  function handleFinishShop(): void {
+    handleOpenCashbackDialog();
+  }
+
+  function handleOpenCashbackDialog(): void {
+    setOpenCashbackDialog(true);
+  }
+
+  function handleCloseCashbackDialog(): void {
+    setOpenCashbackDialog(false);
   }
 
   return (
@@ -78,7 +109,7 @@ export const CartDrawer = () => {
                 <strong className="iron-color">{item.name}</strong>
               </Grid>
               <Grid item xs={4} className="cart-drawer__body__item--right flex justify-end items-center px-5">
-                <strong className="iron-color">R$ {applyMaskMoneyBR(item.price, true)}</strong>
+                <strong className="iron-color">{applyMaskMoneyBR(item.price, false)}</strong>
                 <IconButton
                   className="ml-2"
                   iconName="remove_circle_outline"
@@ -104,16 +135,43 @@ export const CartDrawer = () => {
               <h3 className="lead-color">Total: </h3>
             </Grid>
             <Grid item xs={6} className="flex justify-end flex-col py-10 px-5">
-              <h3 className="lead-color text-right">{applyMaskMoneyBR(getTotalSum(items))}</h3>
+              <h3 className="lead-color text-right">{applyMaskMoneyBR(totalSum)}</h3>
               <span className="iron-color text-right">
-                {maxInstallments}x de R$ {applyMaskMoneyBR(getTotalSum(items) / maxInstallments)} s/ juros.
+                {maxInstallments}x de {applyMaskMoneyBR(totalSum / maxInstallments)} s/ juros.
               </span>
             </Grid>
             <Grid item xs={12} className="cart-drawer__footer flex justify-center py-5">
-              <Button className="w-1/2" variant="contained" color="primary" disabled={!items?.length}>
-                Finalizar
+              <Button
+                className="w-1/2"
+                variant="contained"
+                color="primary"
+                disabled={!items?.length}
+                onClick={handleFinishShop}
+              >
+                Finalizar Compra
               </Button>
             </Grid>
+
+            <Dialog
+              fullScreen={fullScreen}
+              open={openCashbackDialog}
+              onClose={handleCloseCashbackDialog}
+              aria-labelledby="responsive-dialog-title"
+            >
+              <DialogTitle id="responsive-dialog-title">Obrigado pela compra.</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Esperamos que você retorne em breve para levar mais pokémons de nossa loja! Como forma de
+                  agradecimento, você recebeu um <strong>cashback</strong> de:
+                  <h4 className="mt-4">{applyMaskMoneyBR(cashback)}</h4>
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleCloseCashbackDialog} color="primary" variant="contained" autoFocus>
+                  Fechar
+                </Button>
+              </DialogActions>
+            </Dialog>
           </>
         )}
       </Grid>

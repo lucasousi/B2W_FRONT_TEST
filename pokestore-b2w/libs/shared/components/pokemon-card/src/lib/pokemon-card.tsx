@@ -65,7 +65,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
   function getFormattedInstallmentRealValue(value: number) {
     const installmentValue = value / maxInstallments;
 
-    return applyMaskMoneyBR(installmentValue, true);
+    return applyMaskMoneyBR(installmentValue);
   }
 
   function handleExpandClick() {
@@ -91,9 +91,9 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
         title={<h4 className="lead-color mb-2">{formattedPokemon.name}</h4>}
         subheader={
           <div className="flex flex-col">
-            <span className="lead-color pokemon-price">R$ {applyMaskMoneyBR(formattedPokemon.price, true)}</span>
+            <span className="lead-color pokemon-price">{applyMaskMoneyBR(formattedPokemon.price)}</span>
             <span className="iron-color">
-              {maxInstallments}x de R$ {getFormattedInstallmentRealValue(formattedPokemon.price)} s/ juros.
+              {maxInstallments}x de {getFormattedInstallmentRealValue(formattedPokemon.price)} s/ juros.
             </span>
           </div>
         }
