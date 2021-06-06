@@ -1,4 +1,4 @@
-import { NameUrlRelation, SummaryPokemon } from '@shared/entities/dtos';
+import { NameUrlRelation, SummaryPokemon } from '../dtos';
 
 export interface GetPokemonByTypeDTO {
   damage_relations: Damagerelations;
