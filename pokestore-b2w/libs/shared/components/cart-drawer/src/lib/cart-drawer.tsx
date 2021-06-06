@@ -98,17 +98,14 @@ export const CartDrawer = () => {
       ModalProps={{ disableBackdropClick: false, disableEscapeKeyDown: false }}
     >
       <Grid container spacing={0} className="cart-drawer__grid flex justify-center">
-        <Grid item xs={12} className="cart-drawer__header flex justify-end p-2">
+        <Grid item xs={10} className="cart-drawer__header--title flex items-center px-4 pt-4">
+          <MaterialIcon className="mr-2" iconName="shopping_cart" />
+          <h3 className="lead-color">Carrinho de Compras</h3>
+        </Grid>
+        <Grid item xs={2} className="cart-drawer__header--action flex justify-end px-4 pt-4">
           <IconButton iconName="close" tooltipDescription="Fechar Carrinho" onClick={handleDrawerClose} />
         </Grid>
-        <Grid item xs={12}>
-          <Divider />
-        </Grid>
-        <Grid item xs={12} className="cart-drawer__title text-center px-2 py-5">
-          <div className="flex items-center justify-center">
-            <MaterialIcon className="mr-2" iconName="shopping_cart" />
-            <h3 className="lead-color">Carrinho de Compras</h3>
-          </div>
+        <Grid item xs={12} className="flex items-center px-4 pb-4">
           <span className="gray-color">Abaixo, todos os pokémons que você levará para sua Pokédex.</span>
         </Grid>
         <Grid item xs={12}>
@@ -141,7 +138,7 @@ export const CartDrawer = () => {
             <CircularProgress className="cart-drawer__loading-spinner" />
           </div>
         ) : (
-          <div className="cart-drawer__not-found py-4">
+          <div className="cart-drawer__not-found py-10">
             <img src={SadPikachu} width="100%" height="100%" alt="pokemon-not-found" />
             <h4 className="lead-color pt-4">Nenhum pokémon encontrado :(</h4>
           </div>
