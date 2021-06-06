@@ -68,8 +68,10 @@ export const CartDrawer = () => {
   }
 
   function handleUnbuyPokemon(pokemon: PokemonViewModel) {
+    setIsLoading(true);
     removeItemFromCart(pokemon);
     toast.dark(`${pokemon.name} removido do carrinho.`);
+    setTimeout(() => setIsLoading(false), 500);
   }
 
   function handleFinishShop(): void {
@@ -88,7 +90,13 @@ export const CartDrawer = () => {
   }
 
   return (
-    <Drawer anchor="right" open={open} className="cart-drawer">
+    <Drawer
+      anchor="right"
+      disableBackdropClick
+      disableEscapeKeyDown
+      open={open}
+      ModalProps={{ disableBackdropClick: false, disableEscapeKeyDown: false }}
+    >
       <Grid container spacing={0} className="cart-drawer__grid flex justify-center">
         <Grid item xs={12} className="cart-drawer__header flex justify-end p-2">
           <IconButton iconName="close" tooltipDescription="Fechar Carrinho" onClick={handleDrawerClose} />
@@ -162,14 +170,16 @@ export const CartDrawer = () => {
             </Grid>
 
             <Dialog
+              disableBackdropClick
+              disableEscapeKeyDown
               fullScreen={fullScreen}
               open={openCashbackDialog}
               onClose={handleCloseCashbackDialog}
               aria-labelledby="responsive-dialog-title"
             >
               <div className="flex items-center px-5 pt-3">
-                <h4 className="iron-color text-left w-1/2">Obrigado pela compra!</h4>
-                <span className="text-right w-1/2">
+                <h4 className="iron-color text-left w-3/4">Obrigado pela compra!</h4>
+                <span className="text-right w-1/4">
                   <IconButton iconName="close" tooltipDescription="Finalizar" onClick={handleCloseCashbackDialog} />
                 </span>
               </div>

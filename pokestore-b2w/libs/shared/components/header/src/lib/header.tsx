@@ -35,18 +35,18 @@ export const Header = ({ pageTitle }: HeaderProps) => {
   }
 
   return (
-    <header className="header-container flex items-center">
+    <header className="header flex items-center">
       <div className="container mx-auto px-5">
         <Grid container spacing={1} className="flex items-center">
-          <Grid item xs={5} className="flex">
-            <img src={PokeStoreLogo} className="mr-3" width="189px" height="50px" alt="logo" />
-            <img src={WaterLogo} className="mr-3" width="50px" height="50px" alt="logo" />
+          <Grid item xs={5} className="flex items-center">
+            <img src={PokeStoreLogo} className="header__pokestore-logo mr-3" alt="logo" />
+            <img src={WaterLogo} className="header__pokemon-type-logo mr-3" alt="logo" />
           </Grid>
           <Grid item xs={5}></Grid>
           <Grid item xs={2} className="flex justify-end">
             <IconButton
               iconName="shopping_cart"
-              className="cart-icon"
+              className="header__cart-icon"
               tooltipDescription="Carrinho"
               badgeCount={itemsCount}
               badgeColor="secondary"

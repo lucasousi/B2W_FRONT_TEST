@@ -17,7 +17,7 @@ import { PokemonViewModel } from '@shared/entities/view-models';
 
 export const AquamonsStoreHome = () => {
   const aquaTypeID = 11;
-  const pokemonsPerPage = 16;
+  const pokemonsPerPage = 12;
   const fakeArrayToLoadingSkeleton = [...Array(pokemonsPerPage).keys()];
 
   const { getSummarizedPokemons } = useSummarizedPokemonsService();
@@ -154,7 +154,7 @@ export const AquamonsStoreHome = () => {
                 sm={12}
                 md={6}
                 lg={4}
-                xl={3}
+                xl={4}
                 className="home-container__pokecard-container"
               >
                 <Skeleton key={index} variant="rect" height={212} />
@@ -168,7 +168,7 @@ export const AquamonsStoreHome = () => {
                 sm={12}
                 md={6}
                 lg={4}
-                xl={3}
+                xl={4}
                 className="home-container__pokecard-container"
               >
                 <PokemonCard formattedPokemon={formattedPokemon} />

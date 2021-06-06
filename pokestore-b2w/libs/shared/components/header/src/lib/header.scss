@@ -1,6 +1,6 @@
 @use '@styles/variables.scss' as variables;
 
-.header-container {
+.header {
   position: absolute;
   top: 0;
   width: 100%;
@@ -9,7 +9,27 @@
   background-color: white;
   box-shadow: variables.$awesome-box-shadow;
 
-  .cart-icon {
-    font-size: 2rem;
+  &__pokestore-logo {
+    width: 189px;
+    height: 50px;
+  }
+
+  &__pokemon-type-logo {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    &__pokestore-logo {
+      width: 170.1px;
+      height: 45px;
+    }
+
+    &__pokemon-type-logo {
+      width: 40px;
+      height: 40px;
+    }
   }
 }

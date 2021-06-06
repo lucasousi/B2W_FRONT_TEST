@@ -91,7 +91,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
         title={<span className="lead-color mb-2 pokemon-card__name">{formattedPokemon.name}</span>}
         subheader={
           <div className="flex flex-col">
-            <span className="lead-color pokemon-price">{applyMaskMoneyBR(formattedPokemon.price)}</span>
+            <span className="lead-color pokemon-card__price">{applyMaskMoneyBR(formattedPokemon.price)}</span>
             <span className="iron-color">
               {maxInstallments}x de {getFormattedInstallmentRealValue(formattedPokemon.price)} s/ juros.
             </span>
@@ -99,8 +99,8 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
         }
       />
 
-      <CardActions disableSpacing className="pokemon-card__actions">
-        <div className="pokemon-card__actions__left">
+      <CardActions disableSpacing className="pokemon-card__actions flex w-full">
+        <div className="pokemon-card__actions__left w-3/4">
           {isPokemonOnCart(formattedPokemon) ? (
             <Button
               variant="outlined"
@@ -121,7 +121,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
             </Button>
           )}
         </div>
-        <div className="pokemon-card__actions__right">
+        <div className="pokemon-card__actions__right flex justify-end w-1/4">
           <IconButton iconName="auto_stories" iconType="two-tone" tooltipDescription="Ver dossiê pokémon" />
           <IconButton
             iconName="arrow_drop_down"
