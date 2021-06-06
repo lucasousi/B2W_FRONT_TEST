@@ -16,6 +16,7 @@ function getInitialState(): CartState {
 export const cartStore = createEntityStore<CartState>(getInitialState(), {
   name: 'cart',
   idKey: 'entityID',
+  resettable: true,
 });
 
 export function setOpenToCartStore(value: boolean) {

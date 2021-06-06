@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 import { Subscription } from 'rxjs';
 
 import SadPikachu from '@aquamons-store/assets/sad-pikachu.gif';
+import ThanksPikachu from '@aquamons-store/assets/thanks-pikachu.png';
 import {
-    Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer,
-    Grid
+    Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+    Divider, Drawer, Grid
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -22,8 +23,9 @@ export const CartDrawer = () => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const { open$, items$ } = useCartQuery();
-  const { setOpenCart, removeItemFromCart } = useCartService();
+  const { setOpenCart, removeItemFromCart, clearCart } = useCartService();
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [items, setItems] = useState<PokemonViewModel[]>([]);
   const [totalSum, setTotalSum] = useState(0);
   const [cashback, setCashback] = useState(0);
@@ -79,7 +81,10 @@ export const CartDrawer = () => {
   }
 
   function handleCloseCashbackDialog(): void {
+    setIsLoading(true);
     setOpenCashbackDialog(false);
+    clearCart();
+    window.location.reload();
   }
 
   return (
@@ -123,6 +128,10 @@ export const CartDrawer = () => {
               </Grid>
             </Fragment>
           ))
+        ) : isLoading ? (
+          <div className="pt-16">
+            <CircularProgress className="cart-drawer__loading-spinner" />
+          </div>
         ) : (
           <div className="cart-drawer__not-found py-4">
             <img src={SadPikachu} width="100%" height="100%" alt="pokemon-not-found" />
@@ -158,19 +167,22 @@ export const CartDrawer = () => {
               onClose={handleCloseCashbackDialog}
               aria-labelledby="responsive-dialog-title"
             >
-              <DialogTitle id="responsive-dialog-title">Obrigado pela compra.</DialogTitle>
+              <div className="flex items-center px-5 pt-3">
+                <h4 className="iron-color text-left w-1/2">Obrigado pela compra!</h4>
+                <span className="text-right w-1/2">
+                  <IconButton iconName="close" tooltipDescription="Finalizar" onClick={handleCloseCashbackDialog} />
+                </span>
+              </div>
               <DialogContent>
                 <DialogContentText>
                   Esperamos que você retorne em breve para levar mais pokémons de nossa loja! Como forma de
-                  agradecimento, você recebeu um <strong>cashback</strong> de:
-                  <h4 className="mt-4">{applyMaskMoneyBR(cashback)}</h4>
+                  agradecimento, você recebeu um <strong>cashback</strong> de:{' '}
+                  <strong className="mt-4">{applyMaskMoneyBR(cashback)}</strong>
                 </DialogContentText>
+                <div className="flex justify-center mb-5">
+                  <img src={ThanksPikachu} width="100px" height="100%" alt="pikachu-agradece" />
+                </div>
               </DialogContent>
-              <DialogActions>
-                <Button onClick={handleCloseCashbackDialog} color="primary" variant="contained" autoFocus>
-                  Fechar
-                </Button>
-              </DialogActions>
             </Dialog>
           </>
         )}
