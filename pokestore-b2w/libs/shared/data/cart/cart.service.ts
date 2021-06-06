@@ -23,7 +23,7 @@ export function useCartService(): CartService {
     removeItemFromCartStore(item);
   }
 
-  function clearCart() {
+  function clearCart(): void {
     cartStore.reset();
   }
 

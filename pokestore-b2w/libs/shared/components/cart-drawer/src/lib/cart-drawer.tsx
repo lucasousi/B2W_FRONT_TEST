@@ -35,7 +35,7 @@ export const CartDrawer = () => {
     const subscription1 = subscribeOpenStatusChange();
     const subscription2 = subscribeItemsChange();
 
-    return function cleanup() {
+    return function cleanup(): void {
       subscription1.unsubscribe();
       subscription2.unsubscribe();
     };

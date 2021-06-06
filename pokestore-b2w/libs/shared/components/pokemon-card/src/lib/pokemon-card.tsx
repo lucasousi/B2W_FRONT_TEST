@@ -49,7 +49,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
   useEffect(() => {
     const subscription1 = subscribeItemsChange();
 
-    return function cleanup() {
+    return function cleanup(): void {
       subscription1.unsubscribe();
     };
   }, []);
@@ -68,7 +68,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
     return applyMaskMoneyBR(installmentValue);
   }
 
-  function handleExpandClick() {
+  function handleExpandClick(): void {
     setExpanded(!expanded);
   }
 

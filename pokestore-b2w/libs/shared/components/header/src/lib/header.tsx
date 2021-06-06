@@ -21,12 +21,12 @@ export const Header = ({ pageTitle }: HeaderProps) => {
   useEffect(() => {
     const subscription1 = subscribeItemsChange();
 
-    return function cleanup() {
+    return function cleanup(): void {
       subscription1.unsubscribe();
     };
   }, []);
 
-  function handleOpenCart() {
+  function handleOpenCart(): void {
     setOpenCart(true);
   }
 
