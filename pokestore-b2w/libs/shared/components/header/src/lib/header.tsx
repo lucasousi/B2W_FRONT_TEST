@@ -8,11 +8,7 @@ import { Grid } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
 import { useCartQuery, useCartService } from '@shared/data';
 
-export interface HeaderProps {
-  pageTitle: string;
-}
-
-export const Header = ({ pageTitle }: HeaderProps) => {
+export const Header = () => {
   const { setOpenCart } = useCartService();
   const { items$ } = useCartQuery();
   const [itemsCount, setItemsCount] = useState(0);
