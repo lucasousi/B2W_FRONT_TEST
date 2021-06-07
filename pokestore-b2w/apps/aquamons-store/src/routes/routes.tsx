@@ -3,7 +3,7 @@ import { HashRouter, Redirect, RouteProps, Switch } from 'react-router-dom';
 
 import { CustomRoute } from './custom-route';
 
-const AquamonsStoreHome = lazy(() =>
+const _AquamonsStoreHome = lazy(() =>
   import('@aquamons-store/home').then(({ AquamonsStoreHome }) => ({
     default: AquamonsStoreHome,
   }))
@@ -11,7 +11,7 @@ const AquamonsStoreHome = lazy(() =>
 
 const navigableRoutes: RouteProps[] = [
   { path: '/', exact: true, component: () => <Redirect to="/home" /> },
-  { path: '/home', exact: true, component: AquamonsStoreHome },
+  { path: '/home', exact: true, component: _AquamonsStoreHome },
   { component: () => <Redirect to="/home" /> },
 ];
 

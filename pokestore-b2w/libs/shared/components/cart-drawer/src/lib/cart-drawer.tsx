@@ -7,14 +7,7 @@ import { Subscription } from 'rxjs';
 
 import { SadPikachu, ThanksPikachu } from '@aquamons-store/assets';
 import {
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  Divider,
-  Drawer,
-  Grid,
+    Button, CircularProgress, Dialog, DialogContent, DialogContentText, Divider, Drawer, Grid
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -51,9 +44,9 @@ export const CartDrawer = () => {
   }
 
   function subscribeItemsChange(): Subscription {
-    return items$.subscribe((items) => {
-      setItems(items);
-      calcTotalSum(items);
+    return items$.subscribe((value) => {
+      setItems(value);
+      calcTotalSum(value);
     });
   }
 

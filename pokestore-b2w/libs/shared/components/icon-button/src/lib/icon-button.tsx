@@ -12,7 +12,7 @@ export type IconButtonProps = MaterialIconProps &
   MaterialIconButtonProps &
   Pick<HTMLAttributes<HTMLButtonElement>, 'className'> & {
     badgeCount?: number;
-    badgeColor?: 'primary' | 'secondary' | 'default' | 'error' | undefined;
+    badgeColor?: 'primary' | 'secondary' | 'default' | 'error';
   };
 
 export const IconButton = (props: IconButtonProps) => {
