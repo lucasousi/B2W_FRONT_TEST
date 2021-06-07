@@ -5,11 +5,16 @@ import { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Subscription } from 'rxjs';
 
-import SadPikachu from '@aquamons-store/assets/sad-pikachu.gif';
-import ThanksPikachu from '@aquamons-store/assets/thanks-pikachu.png';
+import { SadPikachu, ThanksPikachu } from '@aquamons-store/assets';
 import {
-    Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
-    Divider, Drawer, Grid
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  Divider,
+  Drawer,
+  Grid,
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';

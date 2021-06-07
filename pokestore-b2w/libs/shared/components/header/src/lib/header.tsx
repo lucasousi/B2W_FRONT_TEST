@@ -3,8 +3,7 @@ import './header.scss';
 import { useEffect, useState } from 'react';
 import { Subscription } from 'rxjs';
 
-import PokeStoreLogo from '@aquamons-store/assets/logo.png';
-import WaterLogo from '@aquamons-store/assets/water-icon.svg';
+import { PokeStoreLogo, WaterLogo } from '@aquamons-store/assets';
 import { Grid } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
 import { useCartQuery, useCartService } from '@shared/data';
