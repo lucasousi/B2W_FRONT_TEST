@@ -12,7 +12,7 @@ export const App = () => {
     <>
       <ToastContainer pauseOnFocusLoss position="bottom-right" draggable={false} rtl={false} autoClose={4000} />
       <div className="app-root grid-cols-1">
-        <Header pageTitle="Aquamons Store" />
+        <Header />
         <main className="app-main pb-4">
           <CartDrawer />
           <Routes />
