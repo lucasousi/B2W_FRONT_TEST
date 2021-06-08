@@ -1,18 +1,18 @@
-import './index.css';
+import './index.scss';
 
-import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './App/App';
+import { enableAkitaProdMode, persistState } from '@datorama/akita';
+
+import { App } from './app/app';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// Persist akita state on localStorage
+enableAkitaProdMode();
+persistState();
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

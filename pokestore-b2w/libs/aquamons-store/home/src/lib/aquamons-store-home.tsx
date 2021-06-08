@@ -20,6 +20,7 @@ export const AquamonsStoreHome = () => {
   const pokemonsPerPage = 12;
   const fakeArrayToLoadingSkeleton = [...Array(pokemonsPerPage).keys()];
   const pageTitle = 'Loja de pokémons do tipo Água';
+  const pageSubtitle = 'Aqui você encontra os principais pokémons aquáticos para sua pokedéx.';
 
   const { getSummarizedPokemons } = useSummarizedPokemonsService();
   const { summarizedPokemons$ } = useSummarizedPokemonsQuery();
@@ -120,7 +121,7 @@ export const AquamonsStoreHome = () => {
       <Grid container spacing={3} className="home-container__grid flex justify-center">
         <Grid item xs={12} className="home-container__title__subtitle">
           <h2 className="home-container__title lead-color">{pageTitle}</h2>
-          <span className="gray-color">Aqui você encontra os principais pokémons aquáticos para sua pokedéx.</span>
+          <span className="home-container__subtitle gray-color">{pageSubtitle}</span>
         </Grid>
 
         <Grid item xs={12}>
@@ -172,7 +173,7 @@ export const AquamonsStoreHome = () => {
                 xl={4}
                 className="home-container__pokecard-container"
               >
-                <PokemonCard formattedPokemon={formattedPokemon} />
+                <PokemonCard formattedPokemon={formattedPokemon} buyButtonColor="primary" />
               </Grid>
             ))}
       </Grid>

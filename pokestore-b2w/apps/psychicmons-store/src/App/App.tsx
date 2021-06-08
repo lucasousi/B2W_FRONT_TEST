@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './app.scss';
+import '../styles/custom-global-styles.scss';
 
-function App() {
+import { ToastContainer } from 'react-toastify';
+
+import { PsychicLogo } from '@psychicmons-store/assets';
+import { CartDrawer, Header } from '@shared/components';
+
+import { Routes } from '../routes/routes';
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer
+        pauseOnFocusLoss
+        className="toast-container"
+        position="bottom-right"
+        draggable={false}
+        rtl={false}
+        autoClose={4000}
+      />
+      <div className="app-root grid-cols-1">
+        <Header elementLogo={PsychicLogo} />
+        <main className="app-main pb-4">
+          <CartDrawer />
+          <Routes />
+        </main>
+      </div>
+    </>
   );
-}
-
-export default App;
+};

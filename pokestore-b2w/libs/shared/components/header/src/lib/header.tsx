@@ -3,12 +3,16 @@ import './header.scss';
 import { useEffect, useState } from 'react';
 import { Subscription } from 'rxjs';
 
-import { PokeStoreLogo, WaterLogo } from '@aquamons-store/assets';
+import { PokeStoreLogo } from '@aquamons-store/assets';
 import { Grid } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
 import { useCartQuery, useCartService } from '@shared/data';
 
-export const Header = () => {
+export interface HeaderProps {
+  elementLogo: string;
+}
+
+export const Header = ({ elementLogo }: HeaderProps) => {
   const { setOpenCart } = useCartService();
   const { items$ } = useCartQuery();
   const [itemsCount, setItemsCount] = useState(0);
@@ -35,7 +39,7 @@ export const Header = () => {
         <Grid container spacing={1} className="flex items-center">
           <Grid item xs={5} className="flex items-center">
             <img src={PokeStoreLogo} className="header__pokestore-logo mr-3" alt="logo" />
-            <img src={WaterLogo} className="header__pokemon-type-logo mr-3" alt="logo" />
+            <img src={elementLogo} className="header__pokemon-type-logo mr-3" alt="logo" />
           </Grid>
           <Grid item xs={5}></Grid>
           <Grid item xs={2} className="flex justify-end">

@@ -1,0 +1,9 @@
+@use '@styles/variables.scss' as variables;
+
+.home-container {
+  background-color: transparent;
+}
+
+.home-container__title__subtitle {
+  margin-bottom: 30px !important;
+}

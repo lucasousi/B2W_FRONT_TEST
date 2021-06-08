@@ -7,7 +7,8 @@ import { toast } from 'react-toastify';
 import { Subscription } from 'rxjs';
 
 import {
-    Button, Card, CardActions, CardContent, CardHeader, Collapse, createStyles, makeStyles, Theme
+    Button, Card, CardActions, CardContent, CardHeader, Collapse, createStyles, makeStyles,
+    PropTypes, Theme
 } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
 import { useCartQuery, useCartService } from '@shared/data';
@@ -36,9 +37,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface PokemonCardProps {
   formattedPokemon: PokemonViewModel;
+  buyButtonColor: PropTypes.Color;
 }
 
-export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
+export const PokemonCard = ({ formattedPokemon, buyButtonColor }: PokemonCardProps) => {
   const maxInstallments = 10;
   const classes = useStyles();
   const { addItemToCart, removeItemFromCart } = useCartService();
@@ -113,7 +115,7 @@ export const PokemonCard = ({ formattedPokemon }: PokemonCardProps) => {
           ) : (
             <Button
               variant="outlined"
-              color="primary"
+              color={buyButtonColor}
               startIcon={<span className="material-icons-outlined">add_shopping_cart</span>}
               onClick={() => handleBuyPokemon(formattedPokemon)}
             >

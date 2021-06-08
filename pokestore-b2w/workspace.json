@@ -41,7 +41,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired start",
+            "command": "export PORT=3000 && node ../../node_modules/.bin/react-app-rewired start",
             "cwd": "apps/aquamons-store"
           }
         },
@@ -81,7 +81,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired start",
+            "command": "export PORT=3001 && node ../../node_modules/.bin/react-app-rewired start --port 3006",
             "cwd": "apps/firemons-store"
           }
         },
@@ -121,7 +121,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired start",
+            "command": "export PORT=3002 && node ../../node_modules/.bin/react-app-rewired start",
             "cwd": "apps/psychicmons-store"
           }
         },
@@ -151,9 +151,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/aquamons-store/home/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/aquamons-store/home/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -174,9 +172,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/shared/components/material-icon/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/shared/components/material-icon/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -197,9 +193,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/shared/components/bootstrap-tooltip/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/shared/components/bootstrap-tooltip/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -220,9 +214,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/shared/components/icon-button/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/shared/components/icon-button/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -243,9 +235,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/shared/components/header/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/shared/components/header/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -266,9 +256,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/shared/components/cart-drawer/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/shared/components/cart-drawer/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -289,9 +277,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/shared/components/pokemon-card/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/shared/components/pokemon-card/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
@@ -299,6 +285,48 @@
           "outputs": ["coverage/libs/shared/components/pokemon-card"],
           "options": {
             "jestConfig": "libs/shared/components/pokemon-card/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "firemons-store-home": {
+      "root": "libs/firemons-store/home",
+      "sourceRoot": "libs/firemons-store/home/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/firemons-store/home/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/firemons-store/home"],
+          "options": {
+            "jestConfig": "libs/firemons-store/home/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "psychicmons-store-home": {
+      "root": "libs/psychicmons-store/home",
+      "sourceRoot": "libs/psychicmons-store/home/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/psychicmons-store/home/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/psychicmons-store/home"],
+          "options": {
+            "jestConfig": "libs/psychicmons-store/home/jest.config.js",
             "passWithNoTests": true
           }
         }

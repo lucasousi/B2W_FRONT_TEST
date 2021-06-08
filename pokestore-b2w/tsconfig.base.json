@@ -18,6 +18,10 @@
     "paths": {
       "@aquamons-store/home": ["libs/aquamons-store/home/src/index.ts"],
       "@aquamons-store/assets": ["apps/aquamons-store/src/assets/index.ts"],
+      "@firemons-store/home": ["libs/firemons-store/home/src/index.ts"],
+      "@firemons-store/assets": ["apps/firemons-store/src/assets/index.ts"],
+      "@psychicmons-store/assets": ["apps/psychicmons-store/src/assets/index.ts"],
+      "@psychicmons-store/home": ["libs/psychicmons-store/home/src/index.ts"],
       "@shared/data": ["libs/shared/data/index.ts"],
       "@shared/helpers": ["libs/shared/helpers/index.ts"],
       "@shared/hooks": ["libs/shared/hooks/index.ts"],

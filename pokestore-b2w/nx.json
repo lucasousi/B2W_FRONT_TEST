@@ -34,6 +34,12 @@
     "aquamons-store-home": {
       "tags": ["type:lib", "scope:aquamons-store"]
     },
+    "firemons-store-home": {
+      "tags": ["type:lib", "scope:firemons-store"]
+    },
+    "psychicmons-store-home": {
+      "tags": ["type:lib", "scope:psychicmons-store"]
+    },
     "shared-components-material-icon": {
       "tags": ["type:lib"]
     },

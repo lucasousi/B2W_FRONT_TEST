@@ -63,6 +63,7 @@
     "@nrwl/web": "12.3.5",
     "@nrwl/workspace": "12.3.5",
     "@tailwindcss/postcss7-compat": "^2.1.2",
+    "@testing-library/react": "11.2.6",
     "@types/enzyme": "^3.10.8",
     "@types/jest": "26.0.8",
     "@types/lodash": "^4.14.170",

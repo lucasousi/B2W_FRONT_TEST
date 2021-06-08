@@ -11,5 +11,7 @@ module.exports = {
     '<rootDir>/libs/header',
     '<rootDir>/libs/cart-drawer',
     '<rootDir>/libs/shared/components/pokemon-card',
+    '<rootDir>/libs/firemons-store/home',
+    '<rootDir>/libs/psychicmons-store/home',
   ],
 };
