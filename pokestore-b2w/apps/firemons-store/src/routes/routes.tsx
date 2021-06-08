@@ -9,9 +9,16 @@ const _FiremonsStoreHome = lazy(() =>
   }))
 );
 
+const _PokemonDetail = lazy(() =>
+  import('@shared/pages').then(({ PokemonDetail }) => ({
+    default: PokemonDetail,
+  }))
+);
+
 const navigableRoutes: RouteProps[] = [
   { path: '/', exact: true, component: () => <Redirect to="/home" /> },
   { path: '/home', exact: true, component: _FiremonsStoreHome },
+  { path: '/pokemon-detail/:type/:id', component: _PokemonDetail },
   { component: () => <Redirect to="/home" /> },
 ];
 
