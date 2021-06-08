@@ -3,7 +3,7 @@ import { createEntityStore } from '@datorama/akita';
 import { GetDetailedPokemonDTO } from '../../entities/dtos';
 
 export interface FullDetailedPokemonState {
-  fullDetailedPokemon: Partial<GetDetailedPokemonDTO>;
+  fullDetailedPokemon: GetDetailedPokemonDTO | Partial<GetDetailedPokemonDTO>;
 }
 
 function getInitialState(): FullDetailedPokemonState {
