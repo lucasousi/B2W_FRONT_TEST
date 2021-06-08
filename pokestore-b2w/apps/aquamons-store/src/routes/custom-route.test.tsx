@@ -1,14 +1,13 @@
-import { configure, mount } from 'enzyme';
-import { HashRouter } from 'react-router-dom';
-
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { mount } from 'enzyme';
+import { HashRouter, Route } from 'react-router-dom';
 
 import { CustomRoute } from './custom-route';
 
-describe('AppComponent', () => {
-  let wrapper = mount(<CustomRoute />, { wrappingComponent: HashRouter });
+describe('CustomRoute', () => {
+  const wrapper = mount(<CustomRoute />, { wrappingComponent: HashRouter });
 
-  it('1', () => {
-    expect(1).toEqual(1);
+  it('shound have a Route component', () => {
+    const routeComponentExists = wrapper.find(Route).exists();
+    expect(routeComponentExists).toBe(true);
   });
 });

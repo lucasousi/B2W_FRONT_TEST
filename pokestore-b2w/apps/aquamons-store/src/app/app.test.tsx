@@ -6,8 +6,8 @@ import { CartDrawer, Header } from '@shared/components';
 import { Routes } from '../routes/routes';
 import { App } from './app';
 
-describe('AppComponent HTML', () => {
-  let wrapper = mount(<App />);
+describe('AppComponent', () => {
+  const wrapper = mount(<App />);
 
   it('should have a unique root div element', () => {
     const rootElements = wrapper.find('.app-root');
