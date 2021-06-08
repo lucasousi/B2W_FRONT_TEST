@@ -13,5 +13,6 @@ module.exports = {
     '<rootDir>/libs/shared/components/pokemon-card',
     '<rootDir>/libs/firemons-store/home',
     '<rootDir>/libs/psychicmons-store/home',
+    '<rootDir>/libs/shared/pages/pokemon-detail',
   ],
 };

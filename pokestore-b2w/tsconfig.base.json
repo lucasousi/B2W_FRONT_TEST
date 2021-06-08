@@ -30,13 +30,15 @@
       "@shared/entities/view-models": ["libs/shared/entities/view-models/index.ts"],
       "@shared/entities/component-models": ["libs/shared/entities/component-models/index.ts"],
       "@shared/components": ["libs/shared/components/index.ts"],
-      "@shared/service": ["libs/shared/service/index.ts"],
       "@shared/components/material-icon": ["libs/shared/components/material-icon/src/index.ts"],
       "@shared/components/bootstrap-tooltip": ["libs/shared/components/bootstrap-tooltip/src/index.ts"],
       "@shared/components/icon-button": ["libs/shared/components/icon-button/src/index.ts"],
       "@shared/components/header": ["libs/shared/components/header/src/index.ts"],
       "@shared/components/cart-drawer": ["libs/shared/components/cart-drawer/src/index.ts"],
-      "@shared/components/pokemon-card": ["libs/shared/components/pokemon-card/src/index.ts"]
+      "@shared/components/pokemon-card": ["libs/shared/components/pokemon-card/src/index.ts"],
+      "@shared/service": ["libs/shared/service/index.ts"],
+      "@shared/pages": ["libs/shared/pages/index.ts"],
+      "@shared/pages/pokemon-detail": ["libs/shared/pages/pokemon-detail/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

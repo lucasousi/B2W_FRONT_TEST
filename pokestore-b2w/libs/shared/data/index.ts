@@ -7,3 +7,6 @@ export * from './detailed-pokemons/detailed-pokemon.service';
 export * from './cart/cart.store';
 export * from './cart/cart.query';
 export * from './cart/cart.service';
+export * from './full-detailed-pokemon/full-detailed-pokemon.store';
+export * from './full-detailed-pokemon/full-detailed-pokemon.query';
+export * from './full-detailed-pokemon/full-detailed-pokemon.service';

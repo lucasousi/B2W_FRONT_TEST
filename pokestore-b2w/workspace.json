@@ -331,6 +331,27 @@
           }
         }
       }
+    },
+    "shared-pages--pokemon-detail": {
+      "root": "libs/shared/pages/pokemon-detail",
+      "sourceRoot": "libs/shared/pages/pokemon-detail/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/pages/pokemon-detail/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/pages/pokemon-detail"],
+          "options": {
+            "jestConfig": "libs/shared/pages/pokemon-detail/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

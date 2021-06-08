@@ -1,11 +1,13 @@
 import { cloneDeep, isEqual } from 'lodash';
 import { finalize } from 'rxjs/operators';
 
+import { EntityStore } from '@datorama/akita';
+
 import { GetPokemonByTypeDTO } from '../../entities/dtos/get-pokemon-by-type.dto';
 import { SummaryPokemon } from '../../entities/dtos/summary-pokemon';
 import { getLimitedRandonNumber, toTitleCase } from '../../helpers';
 import { API } from '../../service/service.factory';
-import { summarizedPokemonsStore } from './summarized-pokemons.store';
+import { summarizedPokemonsStore, SummaryPokemonState } from './summarized-pokemons.store';
 
 export interface SummarizedPokemonsService {
   getSummarizedPokemons: (pokemonTypeID: number) => void;
@@ -36,7 +38,7 @@ export function useSummarizedPokemonsService(): SummarizedPokemonsService {
       });
   }
 
-  function getCurrentSummarizedPokemonsState(store) {
+  function getCurrentSummarizedPokemonsState(store: EntityStore<SummaryPokemonState, unknown, unknown>) {
     const { summarizedPokemons: currentSummarizedPokemonsState } = store.getValue();
     return currentSummarizedPokemonsState;
   }

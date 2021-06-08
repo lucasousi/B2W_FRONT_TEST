@@ -57,6 +57,9 @@
     },
     "pokemon-card": {
       "tags": ["type: lib"]
+    },
+    "shared-pages--pokemon-detail": {
+      "tags": []
     }
   }
 }

@@ -3,6 +3,7 @@ import './pokemon-card.scss';
 import clsx from 'clsx';
 import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Subscription } from 'rxjs';
 
@@ -42,6 +43,7 @@ export interface PokemonCardProps {
 
 export const PokemonCard = ({ formattedPokemon, buyButtonColor }: PokemonCardProps) => {
   const maxInstallments = 10;
+  const history = useHistory();
   const classes = useStyles();
   const { addItemToCart, removeItemFromCart } = useCartService();
   const { items$ } = useCartQuery();
@@ -84,6 +86,10 @@ export const PokemonCard = ({ formattedPokemon, buyButtonColor }: PokemonCardPro
     toast.dark(`${pokemon.name} removido do carrinho.`);
   }
 
+  function handleViewDossier({ id, type }: PokemonViewModel) {
+    history.push(`/pokemon-detail/${type}/${id}`);
+  }
+
   return formattedPokemon ? (
     <Card className={`pokemon-card shadow-sm ${classes.root}`} onMouseLeave={() => expanded && handleExpandClick()}>
       <CardHeader
@@ -124,7 +130,12 @@ export const PokemonCard = ({ formattedPokemon, buyButtonColor }: PokemonCardPro
           )}
         </div>
         <div className="pokemon-card__actions__right flex justify-end w-1/4">
-          <IconButton iconName="auto_stories" iconType="two-tone" tooltipDescription="Ver dossiê pokémon" />
+          <IconButton
+            iconName="auto_stories"
+            iconType="two-tone"
+            tooltipDescription="Ver dossiê pokémon"
+            onClick={() => handleViewDossier(formattedPokemon)}
+          />
           <IconButton
             iconName="arrow_drop_down"
             className={clsx(classes.expand, {

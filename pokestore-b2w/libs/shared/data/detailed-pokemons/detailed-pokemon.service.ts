@@ -1,8 +1,8 @@
-import { cloneDeep, isEqual } from 'lodash';
+import { cloneDeep, first, isEqual } from 'lodash';
 import { finalize } from 'rxjs/operators';
 
 import { GetDetailedPokemonDTO, SummaryPokemon } from '../../entities/dtos';
-import { PokemonViewModel } from '../../entities/view-models/pokemon.view-model';
+import { PokemonType, PokemonViewModel } from '../../entities/view-models/pokemon.view-model';
 import { toTitleCase } from '../../helpers';
 import { API } from '../../service/service.factory';
 import { addDetailedPokemonsToStore, detailedPokemonsStore } from './detailed-pokemon.store';
@@ -47,7 +47,6 @@ export function useDetailedPokemonsService(): DetailedPokemonService {
       delete item.game_indices;
       delete item.past_types;
       delete item.stats;
-      delete item.types;
 
       item.name = toTitleCase(item.name);
       const detailedPokemonOnSummarizedList = summarizedPokemons.find(
@@ -59,14 +58,16 @@ export function useDetailedPokemonsService(): DetailedPokemonService {
   }
 
   function convertDetailedPokemonToPokemonViewModel(detailedPokemon: GetDetailedPokemonDTO): PokemonViewModel {
-    const { abilities, height, name, price, sprites, weight } = detailedPokemon;
+    const { id, abilities, height, name, price, sprites, weight, types } = detailedPokemon;
     const _pokemonViewModel: PokemonViewModel = {
+      id,
       abilities,
       height,
       name,
       price,
       sprites: { front_default: sprites.front_default },
       weight,
+      type: first(types)?.type.name as PokemonType,
     };
 
     return _pokemonViewModel;
