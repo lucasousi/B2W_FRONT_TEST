@@ -5,11 +5,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Subscription } from 'rxjs';
 
-import { Button, CircularProgress, Divider, Grid } from '@material-ui/core';
+import { CircularProgress, Divider, Grid } from '@material-ui/core';
 import { IconButton } from '@shared/components/icon-button';
 import {
-    useCartService, useDetailedPokemonsService, useFullDetailedPokemonQuery,
-    useFullDetailedPokemonService
+    useDetailedPokemonsService, useFullDetailedPokemonQuery, useFullDetailedPokemonService
 } from '@shared/data';
 import { GetDetailedPokemonDTO } from '@shared/entities/dtos';
 import { PokemonType } from '@shared/entities/view-models';
@@ -74,7 +73,6 @@ export const PokemonDetail = () => {
   const { getFullPokemonDetailedInfo } = useFullDetailedPokemonService();
   const [isLoading, setIsLoading] = useState(false);
   const [fullDetailedPokemon, setFullDetailedPokemon] = useState<GetDetailedPokemonDTO>();
-  const { addItemToCart, removeItemFromCart } = useCartService();
 
   useEffect(() => {
     const subscription1 = subscribeFullDetailedPokemonChanges();
@@ -109,13 +107,6 @@ export const PokemonDetail = () => {
     history.push('/home');
   }
 
-  function handleBuyPokemon(pokemon: GetDetailedPokemonDTO) {
-    const formattedPokemon = convertDetailedPokemonToPokemonViewModel(pokemon);
-    addItemToCart(formattedPokemon);
-    toast(`${pokemon.name} inserido no carrinho!`);
-    history.push('/home');
-  }
-
   function isPokemonOnRightStoreType(pokemon: GetDetailedPokemonDTO) {
     return pokemon.types?.find((typeObj) => typeObj.type.name === type);
   }
@@ -139,16 +130,6 @@ export const PokemonDetail = () => {
                 height="96px"
               />
               <h2 className="pokemon-detail__navigate--title mx-4 lead-color">{fullDetailedPokemon.name}</h2>
-              <div className="w-full flex justify-end">
-                <Button
-                  variant="outlined"
-                  color="default"
-                  startIcon={<span className="material-icons-outlined">add_shopping_cart</span>}
-                  onClick={() => handleBuyPokemon(fullDetailedPokemon)}
-                >
-                  Comprar
-                </Button>
-              </div>
             </>
           )}
         </Grid>
