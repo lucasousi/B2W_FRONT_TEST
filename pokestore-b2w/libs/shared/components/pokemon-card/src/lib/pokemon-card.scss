@@ -1,0 +1,27 @@
+@use '@styles/variables.scss' as variables;
+
+.pokemon-card {
+  &__name {
+    font-weight: 800 !important;
+    font-size: 1.2rem;
+  }
+
+  &__price {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 600px) {
+  .pokemon-card {
+    &__name {
+      font-weight: 800 !important;
+      font-size: 1.1rem;
+    }
+
+    &__price {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
+}

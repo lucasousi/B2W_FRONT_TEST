@@ -1,0 +1,77 @@
+@use './colors.scss' as colors;
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  // Ajuste nas fontes serrilhadas
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  backface-visibility: initial;
+  -webkit-backface-visibility: initial;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  text-rendering: optimizeLegibility;
+  -webkit-text-stroke-color: #333;
+  -webkit-text-stroke: 0.2px;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 800 !important;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+.iron-color {
+  color: colors.$iron-color;
+}
+
+.lead-color {
+  color: colors.$lead-color;
+}
+
+.gray-color,
+.grey-color {
+  color: colors.$gray-color;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+}

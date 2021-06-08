@@ -1,0 +1,65 @@
+{
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "pokestore-b2w",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "Y2NlNzMwZTgtNWQwZC00YmJmLTk4N2YtZjA0MDE4Mzc4ZWFhfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "aquamons-store": {
+      "tags": ["type:app", "scope:aquamons-store"]
+    },
+    "firemons-store": {
+      "tags": ["type:app", "scope:firemons-store"]
+    },
+    "psychicmons-store": {
+      "tags": ["type:app", "scope:psychicmons-store"]
+    },
+    "aquamons-store-home": {
+      "tags": ["type:lib", "scope:aquamons-store"]
+    },
+    "firemons-store-home": {
+      "tags": ["type:lib", "scope:firemons-store"]
+    },
+    "psychicmons-store-home": {
+      "tags": ["type:lib", "scope:psychicmons-store"]
+    },
+    "shared-components-material-icon": {
+      "tags": ["type:lib"]
+    },
+    "bootstrap-tooltip": {
+      "tags": ["type: lib"]
+    },
+    "icon-button": {
+      "tags": ["type: lib"]
+    },
+    "header": {
+      "tags": ["type: lib"]
+    },
+    "cart-drawer": {
+      "tags": ["type: lib"]
+    },
+    "pokemon-card": {
+      "tags": ["type: lib"]
+    },
+    "shared-pages--pokemon-detail": {
+      "tags": []
+    }
+  }
+}
