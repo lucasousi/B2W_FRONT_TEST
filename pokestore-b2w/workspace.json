@@ -32,7 +32,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired build",
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js build",
             "cwd": "apps/aquamons-store",
             "outputPath": "dist/apps/aquamons-store"
           }
@@ -41,7 +41,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "export PORT=3000 && node ../../node_modules/.bin/react-app-rewired start",
+            "command": "SET PORT=3000 && node ../../node_modules/react-app-rewired/bin/index.js start",
             "cwd": "apps/aquamons-store"
           }
         },
@@ -57,7 +57,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired test --watchAll=false",
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js test --watchAll=false",
             "cwd": "apps/aquamons-store"
           }
         }
@@ -72,7 +72,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired build",
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js build",
             "cwd": "apps/firemons-store",
             "outputPath": "dist/apps/firemons-store"
           }
@@ -81,7 +81,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "export PORT=3001 && node ../../node_modules/.bin/react-app-rewired start --port 3006",
+            "command": "SET PORT=3001 && node ../../node_modules/react-app-rewired/bin/index.js start",
             "cwd": "apps/firemons-store"
           }
         },
@@ -97,7 +97,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired test --watchAll=false",
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js test --watchAll=false",
             "cwd": "apps/firemons-store"
           }
         }
@@ -112,7 +112,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired build",
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js build",
             "cwd": "apps/psychicmons-store",
             "outputPath": "dist/apps/psychicmons-store"
           }
@@ -121,7 +121,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "export PORT=3002 && node ../../node_modules/.bin/react-app-rewired start",
+            "command": "SET PORT=3002 && node ../../node_modules/react-app-rewired/bin/index.js start",
             "cwd": "apps/psychicmons-store"
           }
         },
@@ -137,7 +137,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "node ../../node_modules/.bin/react-app-rewired test --watchAll=false",
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js test --watchAll=false",
             "cwd": "apps/psychicmons-store"
           }
         }
